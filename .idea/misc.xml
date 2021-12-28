@@ -3,8 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Jeka/AndroidStudioProjects/ProfileBookKotlin/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/Jeka/AndroidStudioProjects/ProfileBookKotlin/app/src/main/res/layout/activity_sign_in.xml" value="0.1" />
         <entry key="..\:/Users/Jeka/AndroidStudioProjects/ProfileBookKotlin/app/src/main/res/layout/activity_sign_up.xml" value="0.1" />
+        <entry key="..\:/Users/Jeka/AndroidStudioProjects/ProfileBookKotlin/app/src/main/res/layout/fragment_sign_in.xml" value="0.1" />
+        <entry key="..\:/Users/Jeka/AndroidStudioProjects/ProfileBookKotlin/app/src/main/res/layout/fragment_sign_up.xml" value="0.12314814814814815" />
       </map>
     </option>
   </component>
