@@ -1,35 +1,34 @@
 package com.example.profilebookkotlin.views
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.profilebookkotlin.R
 import com.example.profilebookkotlin.databinding.FragmentSignInBinding
+import com.example.profilebookkotlin.viewmodels.SignInViewModel
 
-class SignInFragment : Fragment() {
+public class SignInFragment : Fragment() {
+    private lateinit var binding: FragmentSignInBinding
+    private lateinit var viewModel: SignInViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = DataBindingUtil.inflate<FragmentSignInBinding>(
+        binding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_sign_in,
             container,
             false)
-
-        binding.signUpButton.setOnClickListener {
-            signUpClick(it)
-        }
+        viewModel = ViewModelProvider(this)[SignInViewModel::class.java]
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
         return binding.root
-    }
-
-    private fun signUpClick(view: View?) {
-        view?.findNavController()?.navigate(R.id.action_signInFragment2_to_signUpFragment)
     }
 }

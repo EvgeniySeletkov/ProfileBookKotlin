@@ -4,6 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".views.SignUpFragment">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.profilebookkotlin.viewmodels.SignUpViewModel" />
+
+    </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -11,37 +19,34 @@
         android:paddingHorizontal="40dp"
         android:paddingVertical="60dp">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3">
+            android:layout_weight="3"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_centerVertical="true">
+                android:hint="Login"
+                android:text="@{viewModel.login}"
+                android:layout_marginBottom="10dp"/>
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Login"
-                    android:layout_marginBottom="10dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                android:text="@{viewModel.password}"
+                android:layout_marginBottom="10dp"/>
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Password"
-                    android:layout_marginBottom="10dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.confirmPassword}"
+                android:hint="Confirm Password"/>
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Confirm Password"/>
-
-            </LinearLayout>
-
-        </RelativeLayout>
+        </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -54,7 +59,8 @@
                 android:layout_height="wrap_content"
                 android:text="sign up"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginBottom="20dp"
+                android:onClick="@{(view) -> viewModel.onSignUpClick(view)}"/>
 
         </RelativeLayout>
 

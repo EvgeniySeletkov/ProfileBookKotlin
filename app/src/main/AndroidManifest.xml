@@ -10,12 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProfileBookKotlin">
         <activity
-            android:name=".views.SignInActivity"
-            android:exported="false" />
-        <activity
-            android:name=".views.SignUpActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
