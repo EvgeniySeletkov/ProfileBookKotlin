@@ -28,6 +28,6 @@ public class MainListFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        return inflater.inflate(R.layout.fragment_main_list, container, false)
+        return binding.root
     }
 }

@@ -28,5 +28,14 @@
         android:id="@+id/mainListFragment"
         android:name="com.example.profilebookkotlin.views.MainListFragment"
         android:label="fragment_main_list"
-        tools:layout="@layout/fragment_main_list" />
+        tools:layout="@layout/fragment_main_list" >
+        <action
+            android:id="@+id/action_mainListFragment_to_addEditProfileFragment"
+            app:destination="@id/addEditProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addEditProfileFragment"
+        android:name="com.example.profilebookkotlin.views.AddEditProfileFragment"
+        android:label="fragment_add_edit_profile"
+        tools:layout="@layout/fragment_add_edit_profile" />
 </navigation>
