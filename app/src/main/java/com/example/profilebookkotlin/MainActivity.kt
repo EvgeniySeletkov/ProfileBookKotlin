@@ -2,24 +2,49 @@ package com.example.profilebookkotlin
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI
 
 class MainActivity : AppCompatActivity() {
+    private var _navController: NavController? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_main)
-        val navController = this.findNavController(R.id.navHostFragment)
-        NavigationUI.setupActionBarWithNavController(this, navController)
+
+        val navController = findNavController(R.id.navHostFragment)
+        onNavControllerActivated(navController)
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        val navController = this.findNavController(R.id.navHostFragment)
-        return navController.navigateUp() || super.onSupportNavigateUp()
+        return _navController?.navigateUp() ?: false || super.onSupportNavigateUp()
+    }
+
+    private fun onNavControllerActivated(navController: NavController) {
+        if (_navController != navController){
+            _navController?.removeOnDestinationChangedListener(destinationListener)
+            navController.addOnDestinationChangedListener(destinationListener)
+            _navController = navController
+        }
+    }
+
+    private val destinationListener = NavController.OnDestinationChangedListener { _, destination, _ ->
+        //supportActionBar?.title = prepareTitle(destination.label, arguments)
+        supportActionBar?.setDisplayHomeAsUpEnabled(!isStartDestination(destination))
+    }
+
+    private fun isStartDestination(destination: NavDestination?): Boolean {
+        var result = false
+
+        if (destination != null) {
+            val graph = destination.parent
+            if (graph != null){
+                val startDestinations = setOf(R.id.mainListFragment, R.id.signInFragment2) + graph.startDestination
+                result = startDestinations.contains(destination.id)
+            }
+        }
+
+        return result
     }
 }

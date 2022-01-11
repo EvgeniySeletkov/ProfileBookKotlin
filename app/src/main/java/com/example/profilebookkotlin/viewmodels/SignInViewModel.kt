@@ -20,7 +20,7 @@ public class SignInViewModel : ViewModel() {
     }
 
     public fun onSignInClick(view: View) {
-        view.findNavController().graph.startDestination = R.id.mainListFragment
+        //view.findNavController().graph.startDestination = R.id.mainListFragment
         view.findNavController().navigate(SignInFragmentDirections.actionSignInFragment2ToMainListFragment())
     }
 }
