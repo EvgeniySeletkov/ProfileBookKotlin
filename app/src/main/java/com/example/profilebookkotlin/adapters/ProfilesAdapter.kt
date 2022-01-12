@@ -7,7 +7,7 @@ import com.example.profilebookkotlin.databinding.ItemProfileBinding
 import com.example.profilebookkotlin.models.Profile
 
 public class ProfilesAdapter : RecyclerView.Adapter<ProfilesAdapter.ProfilesViewHolder>() {
-    public var _profiles: List<Profile> = emptyList()
+    public var profiles: List<Profile> = emptyList()
     set(value) {
         field = value
         notifyDataSetChanged()
@@ -20,14 +20,14 @@ public class ProfilesAdapter : RecyclerView.Adapter<ProfilesAdapter.ProfilesView
     }
 
     override fun onBindViewHolder(holder: ProfilesViewHolder, position: Int) {
-        val profile = _profiles[position]
+        val profile = profiles[position]
         with(holder.binding){
             profileName.text = profile.name
         }
     }
 
     override fun getItemCount(): Int {
-        return _profiles.size
+        return profiles.size
     }
 
     public class ProfilesViewHolder(

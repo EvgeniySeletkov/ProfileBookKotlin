@@ -38,7 +38,7 @@ public class MainListFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         adapter = ProfilesAdapter()
-        val layoutManager = LinearLayoutManager(context)
+        val layoutManager = LinearLayoutManager(activity)
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = adapter
         profilesService.addListener(profilesListener)
@@ -52,6 +52,6 @@ public class MainListFragment : Fragment() {
     }
 
     private val profilesListener: ProfilesListener = {
-        adapter._profiles = it
+        adapter.profiles = it
     }
 }
