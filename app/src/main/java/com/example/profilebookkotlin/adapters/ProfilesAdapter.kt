@@ -7,11 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.profilebookkotlin.R
 import com.example.profilebookkotlin.databinding.ItemProfileBinding
 import com.example.profilebookkotlin.models.Profile
+import java.text.SimpleDateFormat
 import java.util.*
-import android.graphics.BitmapFactory
-import android.net.Uri
-import java.io.InputStream
-import java.net.URL
 
 
 public class ProfilesAdapter : RecyclerView.Adapter<ProfilesAdapter.ProfilesViewHolder>() {
@@ -42,7 +39,7 @@ public class ProfilesAdapter : RecyclerView.Adapter<ProfilesAdapter.ProfilesView
                 nickname = "abc",
                 name = "abc",
                 description = "abc",
-                date = Date(12, 1, 2022)
+                dateTime = Calendar.getInstance()
             ),
             Profile(
                 id = 2,
@@ -50,7 +47,7 @@ public class ProfilesAdapter : RecyclerView.Adapter<ProfilesAdapter.ProfilesView
                 nickname = "abc",
                 name = "abc",
                 description = "abc",
-                date = Date(12, 1, 2022)
+                dateTime = Calendar.getInstance()
             ),
             Profile(
                 id = 3,
@@ -58,7 +55,7 @@ public class ProfilesAdapter : RecyclerView.Adapter<ProfilesAdapter.ProfilesView
                 nickname = "abc",
                 name = "abc",
                 description = "abc",
-                date = Date(12, 1, 2022)
+                dateTime = Calendar.getInstance()
             ),
             Profile(
                 id = 4,
@@ -66,7 +63,7 @@ public class ProfilesAdapter : RecyclerView.Adapter<ProfilesAdapter.ProfilesView
                 nickname = "abc",
                 name = "abc",
                 description = "abc",
-                date = Date(12, 1, 2022)
+                dateTime = Calendar.getInstance()
             ),
             Profile(
                 id = 5,
@@ -74,7 +71,7 @@ public class ProfilesAdapter : RecyclerView.Adapter<ProfilesAdapter.ProfilesView
                 nickname = "abc",
                 name = "abc",
                 description = "abc",
-                date = Date(12, 1, 2022)
+                dateTime = Calendar.getInstance()
             ),
             Profile(
                 id = 6,
@@ -82,7 +79,7 @@ public class ProfilesAdapter : RecyclerView.Adapter<ProfilesAdapter.ProfilesView
                 nickname = "abc",
                 name = "abc",
                 description = "abc",
-                date = Date(12, 1, 2022)
+                dateTime = Calendar.getInstance()
             )
         ).toMutableList()
     }
@@ -99,7 +96,9 @@ public class ProfilesAdapter : RecyclerView.Adapter<ProfilesAdapter.ProfilesView
 //            val stream: InputStream = URL(profile.image).openStream()
 //            val bmp = BitmapFactory.decodeStream(stream)
 //            profileImage.setImageBitmap(bmp)
+            profileNickname.text = profile.nickname
             profileName.text = profile.name
+            //profileDate.text = SimpleDateFormat("dd.MM.yyyy HH:mm:ss aaa z").format(profile.dateTime).toString()
         }
     }
 }

@@ -10,56 +10,56 @@ public class ProfileService {
     private val _listeners = mutableSetOf<ProfilesListener>()
 
     init {
-        _profiles = listOf(
-            Profile(
-                id = 1,
-                image = null,
-                nickname = "abc",
-                name = "abc",
-                description = "abc",
-                date = Date(12, 1, 2022)
-            ),
-            Profile(
-                id = 2,
-                image = null,
-                nickname = "abc",
-                name = "abc",
-                description = "abc",
-                date = Date(12, 1, 2022)
-            ),
-            Profile(
-                id = 3,
-                image = null,
-                nickname = "abc",
-                name = "abc",
-                description = "abc",
-                date = Date(12, 1, 2022)
-            ),
-            Profile(
-                id = 4,
-                image = null,
-                nickname = "abc",
-                name = "abc",
-                description = "abc",
-                date = Date(12, 1, 2022)
-            ),
-            Profile(
-                id = 5,
-                image = null,
-                nickname = "abc",
-                name = "abc",
-                description = "abc",
-                date = Date(12, 1, 2022)
-            ),
-            Profile(
-                id = 6,
-                image = null,
-                nickname = "abc",
-                name = "abc",
-                description = "abc",
-                date = Date(12, 1, 2022)
-            )
-        ).toMutableList()
+//        _profiles = listOf(
+//            Profile(
+//                id = 1,
+//                image = null,
+//                nickname = "abc",
+//                name = "abc",
+//                description = "abc",
+//                dateTime = Date(12, 1, 2022)
+//            ),
+//            Profile(
+//                id = 2,
+//                image = null,
+//                nickname = "abc",
+//                name = "abc",
+//                description = "abc",
+//                dateTime = Date(12, 1, 2022)
+//            ),
+//            Profile(
+//                id = 3,
+//                image = null,
+//                nickname = "abc",
+//                name = "abc",
+//                description = "abc",
+//                dateTime = Date(12, 1, 2022)
+//            ),
+//            Profile(
+//                id = 4,
+//                image = null,
+//                nickname = "abc",
+//                name = "abc",
+//                description = "abc",
+//                dateTime = Date(12, 1, 2022)
+//            ),
+//            Profile(
+//                id = 5,
+//                image = null,
+//                nickname = "abc",
+//                name = "abc",
+//                description = "abc",
+//                dateTime = Date(12, 1, 2022)
+//            ),
+//            Profile(
+//                id = 6,
+//                image = null,
+//                nickname = "abc",
+//                name = "abc",
+//                description = "abc",
+//                dateTime = Date(12, 1, 2022)
+//            )
+//        ).toMutableList()
     }
 
     public fun addListener(listener: ProfilesListener){
