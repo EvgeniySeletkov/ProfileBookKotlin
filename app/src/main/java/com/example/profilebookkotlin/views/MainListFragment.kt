@@ -21,9 +21,6 @@ public class MainListFragment : Fragment() {
     private lateinit var viewModel: MainListViewModel
     private lateinit var adapter: ProfilesAdapter
 
-    private val profilesService: ProfileService
-    get() = (activity?.applicationContext as App).profileService
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,17 +38,8 @@ public class MainListFragment : Fragment() {
         val layoutManager = LinearLayoutManager(activity)
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = adapter
-        profilesService.addListener(profilesListener)
+        adapter.initProfiles()
 
         return binding.root
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        profilesService.removeListener(profilesListener)
-    }
-
-    private val profilesListener: ProfilesListener = {
-        adapter.profiles = it
     }
 }
