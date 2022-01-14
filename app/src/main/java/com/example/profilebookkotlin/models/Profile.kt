@@ -8,5 +8,5 @@ data class Profile (
     val nickname: String,
     val name: String,
     val description: String,
-    val dateTime: Calendar
+    val dateTime: Date
 )
