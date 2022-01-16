@@ -1,12 +1,11 @@
 package com.example.profilebookkotlin.services.profile
 
-import com.example.profilebookkotlin.models.Profile
-import java.util.*
+import com.example.profilebookkotlin.models.profile.ProfileModel
 
-typealias ProfilesListener = (profiles: List<Profile>) -> Unit
+typealias ProfilesListener = (profiles: List<ProfileModel>) -> Unit
 
 public class ProfileService {
-    private var _profiles = mutableListOf<Profile>()
+    private var _profiles = mutableListOf<ProfileModel>()
     private val _listeners = mutableSetOf<ProfilesListener>()
 
     init {
@@ -75,7 +74,7 @@ public class ProfileService {
         _listeners.forEach { it.invoke(_profiles) }
     }
 
-    public fun getProfiles() : List<Profile> {
+    public fun getProfiles() : List<ProfileModel> {
         return _profiles
     }
 }

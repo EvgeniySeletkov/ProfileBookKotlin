@@ -2,7 +2,7 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".views.AddEditProfileFragment"
+    tools:context=".views.fragments.AddEditProfileFragment"
     android:paddingTop="5dp"
     android:paddingHorizontal="40dp"
     android:paddingBottom="40dp">

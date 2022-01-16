@@ -1,4 +1,4 @@
-package com.example.profilebookkotlin.views
+package com.example.profilebookkotlin.views.fragments
 
 import android.content.Intent
 import android.graphics.Bitmap

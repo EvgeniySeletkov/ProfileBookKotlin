@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.example.profilebookkotlin.R
-import com.example.profilebookkotlin.views.SignInFragmentDirections
+import com.example.profilebookkotlin.views.fragments.SignInFragmentDirections
 
 public class SignInViewModel : ViewModel() {
     private val _login = MutableLiveData<String>()

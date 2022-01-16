@@ -1,4 +1,4 @@
-package com.example.profilebookkotlin.adapters
+package com.example.profilebookkotlin.views.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,14 +7,14 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.profilebookkotlin.R
 import com.example.profilebookkotlin.databinding.ItemProfileBinding
-import com.example.profilebookkotlin.models.Profile
+import com.example.profilebookkotlin.models.profile.ProfileModel
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 public class ProfilesAdapter : RecyclerView.Adapter<ProfilesAdapter.ProfilesViewHolder>() {
-    public var profiles: List<Profile> = emptyList()
+    public var profiles: List<ProfileModel> = emptyList()
     set(value) {
         field = value
         notifyDataSetChanged()
@@ -35,7 +35,7 @@ public class ProfilesAdapter : RecyclerView.Adapter<ProfilesAdapter.ProfilesView
 
     public fun initProfiles(){
         profiles = listOf(
-            Profile(
+            ProfileModel(
                 id = 1,
                 image = null,
                 nickname = "abc",
@@ -43,7 +43,7 @@ public class ProfilesAdapter : RecyclerView.Adapter<ProfilesAdapter.ProfilesView
                 description = "abc",
                 dateTime = Date()
             ),
-            Profile(
+            ProfileModel(
                 id = 2,
                 image = null,
                 nickname = "abc",
@@ -51,7 +51,7 @@ public class ProfilesAdapter : RecyclerView.Adapter<ProfilesAdapter.ProfilesView
                 description = "abc",
                 dateTime = Date()
             ),
-            Profile(
+            ProfileModel(
                 id = 3,
                 image = null,
                 nickname = "abc",
@@ -59,7 +59,7 @@ public class ProfilesAdapter : RecyclerView.Adapter<ProfilesAdapter.ProfilesView
                 description = "abc",
                 dateTime = Date()
             ),
-            Profile(
+            ProfileModel(
                 id = 4,
                 image = null,
                 nickname = "abc",
@@ -67,7 +67,7 @@ public class ProfilesAdapter : RecyclerView.Adapter<ProfilesAdapter.ProfilesView
                 description = "abc",
                 dateTime = Date()
             ),
-            Profile(
+            ProfileModel(
                 id = 5,
                 image = null,
                 nickname = "abc",
@@ -75,7 +75,7 @@ public class ProfilesAdapter : RecyclerView.Adapter<ProfilesAdapter.ProfilesView
                 description = "abc",
                 dateTime = Date()
             ),
-            Profile(
+            ProfileModel(
                 id = 6,
                 image = null,
                 nickname = "abc",
@@ -89,7 +89,7 @@ public class ProfilesAdapter : RecyclerView.Adapter<ProfilesAdapter.ProfilesView
     public class ProfilesViewHolder(item: View) : RecyclerView.ViewHolder(item){
         val binding = ItemProfileBinding.bind(item)
 
-        public fun bind(profile: Profile) = with(binding){
+        public fun bind(profile: ProfileModel) = with(binding){
             if (profile.image != null){
                 profileImage.load(File(profile.image))
             }

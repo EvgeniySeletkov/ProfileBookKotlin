@@ -1,4 +1,4 @@
-package com.example.profilebookkotlin.views
+package com.example.profilebookkotlin.views.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,12 +8,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.profilebookkotlin.App
 import com.example.profilebookkotlin.R
-import com.example.profilebookkotlin.adapters.ProfilesAdapter
+import com.example.profilebookkotlin.views.adapters.ProfilesAdapter
 import com.example.profilebookkotlin.databinding.FragmentMainListBinding
-import com.example.profilebookkotlin.services.profile.ProfileService
-import com.example.profilebookkotlin.services.profile.ProfilesListener
 import com.example.profilebookkotlin.viewmodels.MainListViewModel
 
 public class MainListFragment : Fragment() {
