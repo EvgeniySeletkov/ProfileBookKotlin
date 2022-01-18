@@ -16,17 +16,13 @@ public class SignInViewModel : ViewModel() {
     private val _password = MutableLiveData<String>()
     public val password: MutableLiveData<String> = _password
 
-    init {
-        login.value = "Hello"
-    }
-
     public fun onOpenSignUpFragment(view: View){
         view.findNavController().navigate(R.id.action_signInFragment2_to_signUpFragment)
     }
 
     public fun onSignInClick(view: View) {
         //view.findNavController().graph.startDestination = R.id.mainListFragment
-        var isAuthorize = AuthorizationService.signIn(_login.value.toString(), _password.value.toString())
+        val isAuthorize = AuthorizationService.signIn(_login.value.toString(), _password.value.toString())
 
         if (isAuthorize){
             view.findNavController().navigate(SignInFragmentDirections.actionSignInFragment2ToMainListFragment())
