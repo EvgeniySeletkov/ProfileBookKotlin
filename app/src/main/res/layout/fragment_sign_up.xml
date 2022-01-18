@@ -30,20 +30,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Login"
-                android:text="@{viewModel.login}"
+                android:text="@={viewModel.login}"
                 android:layout_marginBottom="10dp"/>
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Password"
-                android:text="@{viewModel.password}"
+                android:text="@={viewModel.password}"
                 android:layout_marginBottom="10dp"/>
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{viewModel.confirmPassword}"
+                android:text="@={viewModel.confirmPassword}"
                 android:hint="Confirm Password"/>
 
         </LinearLayout>

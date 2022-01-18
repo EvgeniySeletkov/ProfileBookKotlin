@@ -5,19 +5,42 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
+import com.example.profilebookkotlin.models.user.UserModel
+import com.example.profilebookkotlin.services.authorization.AuthorizationService
 
 public class SignUpViewModel : ViewModel() {
-    private val _login = MutableLiveData<String>()
-    public val login: LiveData<String> = _login
+    private var _login = MutableLiveData<String>()
+    var login: MutableLiveData<String> = _login
 
     private val _password = MutableLiveData<String>()
-    public val password: LiveData<String> = _password
+    val password: MutableLiveData<String> = _password
 
     private val _confirmPassword = MutableLiveData<String>()
-    public val confirmPassword: LiveData<String> = _confirmPassword
+    val confirmPassword: MutableLiveData<String> = _confirmPassword
 
-    public fun onSignUpClick(view: View){
-        view.findNavController().popBackStack()
+    fun onSignUpClick(view: View){
+        if (_password.value == _confirmPassword.value){
+            if (!AuthorizationService.hasLogin(_login.value.toString())){
+                val user = createUser()
+
+                if (user != null){
+                    AuthorizationService.signUp(user)
+                    view.findNavController().popBackStack()
+                }
+            }
+        }
     }
 
+    private fun createUser(): UserModel?{
+        var user: UserModel? = null
+
+        if (login.value != password.value){
+            user = UserModel(
+                login = login.value.toString(),
+                password = password.value.toString()
+            )
+        }
+
+        return user
+    }
 }
