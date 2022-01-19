@@ -13,7 +13,7 @@ import com.example.profilebookkotlin.views.adapters.ProfilesAdapter
 import com.example.profilebookkotlin.databinding.FragmentMainListBinding
 import com.example.profilebookkotlin.viewmodels.MainListViewModel
 
-public class MainListFragment : Fragment() {
+class MainListFragment : Fragment() {
     private lateinit var binding: FragmentMainListBinding
     private lateinit var viewModel: MainListViewModel
     private lateinit var adapter: ProfilesAdapter

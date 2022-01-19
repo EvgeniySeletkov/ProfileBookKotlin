@@ -8,7 +8,7 @@ import androidx.navigation.findNavController
 import com.example.profilebookkotlin.models.user.UserModel
 import com.example.profilebookkotlin.services.authorization.AuthorizationService
 
-public class SignUpViewModel : ViewModel() {
+class SignUpViewModel : ViewModel() {
     private var _login = MutableLiveData<String>()
     var login: MutableLiveData<String> = _login
 

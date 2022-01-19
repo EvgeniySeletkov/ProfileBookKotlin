@@ -17,7 +17,7 @@ object AuthorizationService{
     }
 
     fun hasLogin(login: String) : Boolean{
-        var user = _database.userDao.get(login)
+        val user = _database.userDao.get(login)
 
         return user != null
     }

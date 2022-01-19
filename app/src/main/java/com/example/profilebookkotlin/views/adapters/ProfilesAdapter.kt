@@ -13,8 +13,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-public class ProfilesAdapter : RecyclerView.Adapter<ProfilesAdapter.ProfilesViewHolder>() {
-    public var profiles: List<ProfileModel> = emptyList()
+class ProfilesAdapter : RecyclerView.Adapter<ProfilesAdapter.ProfilesViewHolder>() {
+    var profiles: List<ProfileModel> = emptyList()
     set(value) {
         field = value
         notifyDataSetChanged()
@@ -86,10 +86,10 @@ public class ProfilesAdapter : RecyclerView.Adapter<ProfilesAdapter.ProfilesView
         ).toMutableList()
     }
 
-    public class ProfilesViewHolder(item: View) : RecyclerView.ViewHolder(item){
+    class ProfilesViewHolder(item: View) : RecyclerView.ViewHolder(item){
         val binding = ItemProfileBinding.bind(item)
 
-        public fun bind(profile: ProfileModel) = with(binding){
+        fun bind(profile: ProfileModel) = with(binding){
             if (profile.image != null){
                 profileImage.load(File(profile.image))
             }

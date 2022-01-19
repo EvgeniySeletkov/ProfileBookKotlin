@@ -12,7 +12,8 @@ import com.example.profilebookkotlin.models.user.UserModel
     entities = [
         UserModel::class,
         ProfileModel::class],
-    version = 1)
+    version = 1,
+    exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract val userDao : UserDao
 
@@ -28,7 +29,7 @@ abstract class AppDatabase : RoomDatabase() {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
                         AppDatabase::class.java,
-                        "database"
+                        "my_database"
                     )
                         .fallbackToDestructiveMigration()
                         .build()

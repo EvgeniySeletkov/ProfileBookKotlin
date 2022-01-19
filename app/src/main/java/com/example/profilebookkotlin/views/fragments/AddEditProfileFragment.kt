@@ -1,7 +1,6 @@
 package com.example.profilebookkotlin.views.fragments
 
 import android.content.Intent
-import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater

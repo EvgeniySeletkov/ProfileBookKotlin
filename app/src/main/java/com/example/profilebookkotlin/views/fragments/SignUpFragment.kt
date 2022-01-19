@@ -11,7 +11,7 @@ import com.example.profilebookkotlin.R
 import com.example.profilebookkotlin.databinding.FragmentSignUpBinding
 import com.example.profilebookkotlin.viewmodels.SignUpViewModel
 
-public class SignUpFragment : Fragment() {
+class SignUpFragment : Fragment() {
     private lateinit var binding: FragmentSignUpBinding
     private lateinit var viewModel: SignUpViewModel
 
