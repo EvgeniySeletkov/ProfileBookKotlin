@@ -10,8 +10,7 @@ import com.example.profilebookkotlin.models.user.UserModel
 
 @Database(
     entities = [
-        UserModel::class,
-        ProfileModel::class],
+        UserModel::class],
     version = 1,
     exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
