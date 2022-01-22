@@ -1,12 +1,13 @@
 package com.example.profilebookkotlin.viewmodels
 
 import android.view.View
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import com.example.profilebookkotlin.models.user.UserModel
 import com.example.profilebookkotlin.services.authorization.AuthorizationService
+import kotlinx.coroutines.launch
 
 class SignUpViewModel : ViewModel() {
     private var _login = MutableLiveData<String>()
@@ -20,12 +21,14 @@ class SignUpViewModel : ViewModel() {
 
     fun onSignUpClick(view: View){
         if (_password.value == _confirmPassword.value){
-            if (!AuthorizationService.hasLogin(_login.value.toString())){
-                val user = createUser()
+            viewModelScope.launch {
+                if (!AuthorizationService.hasLogin(_login.value.toString())){
+                    val user = createUser()
 
-                if (user != null){
-                    AuthorizationService.signUp(user)
-                    view.findNavController().popBackStack()
+                    if (user != null){
+                        AuthorizationService.signUp(user)
+                        view.findNavController().popBackStack()
+                    }
                 }
             }
         }

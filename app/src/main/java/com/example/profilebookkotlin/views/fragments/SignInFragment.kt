@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.profilebookkotlin.AppDatabase
 import com.example.profilebookkotlin.R
 import com.example.profilebookkotlin.databinding.FragmentSignInBinding
 import com.example.profilebookkotlin.viewmodels.SignInViewModel
@@ -28,8 +27,6 @@ class SignInFragment : Fragment() {
         viewModel = ViewModelProvider(this)[SignInViewModel::class.java]
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-
-        val dataBase = AppDatabase.getInstance(requireNotNull(activity).application).userDao
 
         return binding.root
     }

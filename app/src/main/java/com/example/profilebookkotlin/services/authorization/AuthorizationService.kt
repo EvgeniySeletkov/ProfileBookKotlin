@@ -7,16 +7,16 @@ import com.example.profilebookkotlin.models.user.UserModel
 object AuthorizationService{
     private var _database: AppDatabase = AppDatabase.getInstance(App.applicationContext())
 
-    fun signIn(login: String, password: String): Boolean {
+    suspend fun signIn(login: String, password: String): Boolean {
         val user = _database.userDao.get(login)
         return user != null && user.password == password
     }
 
-    fun signUp(user: UserModel) {
+    suspend fun signUp(user: UserModel) {
         _database.userDao.insert(user)
     }
 
-    fun hasLogin(login: String) : Boolean{
+    suspend fun hasLogin(login: String) : Boolean{
         val user = _database.userDao.get(login)
 
         return user != null
