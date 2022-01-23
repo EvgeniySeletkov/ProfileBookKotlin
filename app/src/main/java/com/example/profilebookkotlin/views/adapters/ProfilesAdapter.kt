@@ -11,14 +11,11 @@ import com.example.profilebookkotlin.models.profile.ProfileModel
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 
-class ProfilesAdapter : RecyclerView.Adapter<ProfilesAdapter.ProfilesViewHolder>() {
-    var profiles: List<ProfileModel> = emptyList()
-    set(value) {
-        field = value
-        notifyDataSetChanged()
-    }
+class ProfilesAdapter(private val profiles: ArrayList<ProfileModel>)
+    : RecyclerView.Adapter<ProfilesAdapter.ProfilesViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfilesViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_profile, parent, false)
@@ -31,59 +28,6 @@ class ProfilesAdapter : RecyclerView.Adapter<ProfilesAdapter.ProfilesViewHolder>
 
     override fun getItemCount(): Int {
         return profiles.size
-    }
-
-    public fun initProfiles(){
-        profiles = listOf(
-            ProfileModel(
-                id = 1,
-                image = null,
-                nickname = "abc",
-                name = "abc",
-                description = "abc",
-                dateTime = Date()
-            ),
-            ProfileModel(
-                id = 2,
-                image = null,
-                nickname = "abc",
-                name = "abc",
-                description = "abc",
-                dateTime = Date()
-            ),
-            ProfileModel(
-                id = 3,
-                image = null,
-                nickname = "abc",
-                name = "abc",
-                description = "abc",
-                dateTime = Date()
-            ),
-            ProfileModel(
-                id = 4,
-                image = null,
-                nickname = "abc",
-                name = "abc",
-                description = "abc",
-                dateTime = Date()
-            ),
-            ProfileModel(
-                id = 5,
-                image = null,
-                nickname = "abc",
-                name = "abc",
-                description = "abc",
-                dateTime = Date()
-            ),
-            ProfileModel(
-                id = 6,
-                image = null,
-                nickname = "abc",
-                name = "abc",
-                description = "abc",
-                dateTime = Date()
-            )
-        ).toMutableList()
     }
 
     class ProfilesViewHolder(item: View) : RecyclerView.ViewHolder(item){
