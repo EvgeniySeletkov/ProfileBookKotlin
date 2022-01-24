@@ -13,6 +13,6 @@ interface ProfileDao {
     @Delete
     suspend fun delete(profile: ProfileModel)
 
-    @Query("SELECT * from profile")
-    suspend fun getAll()
+    @Query("SELECT * from profile WHERE userId = :userId")
+    suspend fun getAll(userId: Int) : List<ProfileModel>
 }

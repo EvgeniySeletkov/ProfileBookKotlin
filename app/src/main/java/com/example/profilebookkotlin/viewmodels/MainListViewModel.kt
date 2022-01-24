@@ -3,9 +3,13 @@ package com.example.profilebookkotlin.viewmodels
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import com.example.profilebookkotlin.models.profile.ProfileModel
+import com.example.profilebookkotlin.services.profile.ProfileService
 import com.example.profilebookkotlin.views.fragments.MainListFragmentDirections
+import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -14,57 +18,10 @@ class MainListViewModel : ViewModel() {
     var profiles = MutableLiveData<ArrayList<ProfileModel>>()
 
     init {
-        _profiles = arrayListOf(
-            ProfileModel(
-                id = 1,
-                image = null,
-                nickname = "abc",
-                name = "abc",
-                description = "abc",
-                dateTime = Date()
-            ),
-            ProfileModel(
-                id = 2,
-                image = null,
-                nickname = "abc",
-                name = "abc",
-                description = "abc",
-                dateTime = Date()
-            ),
-            ProfileModel(
-                id = 3,
-                image = null,
-                nickname = "abc",
-                name = "abc",
-                description = "abc",
-                dateTime = Date()
-            ),
-            ProfileModel(
-                id = 4,
-                image = null,
-                nickname = "abc",
-                name = "abc",
-                description = "abc",
-                dateTime = Date()
-            ),
-            ProfileModel(
-                id = 5,
-                image = null,
-                nickname = "abc",
-                name = "abc",
-                description = "abc",
-                dateTime = Date()
-            ),
-            ProfileModel(
-                id = 6,
-                image = null,
-                nickname = "abc",
-                name = "abc",
-                description = "abc",
-                dateTime = Date()
-            )
-        )
-        profiles.value = _profiles
+        viewModelScope.launch {
+            _profiles = ArrayList(ProfileService.getAllProfiles())
+            profiles.value = _profiles
+        }
     }
 
     fun onAddProfile(view: View){
@@ -75,10 +32,23 @@ class MainListViewModel : ViewModel() {
                 nickname = "cba",
                 name = "cba",
                 description = "cba",
-                dateTime = Date()
+                dateTime = SimpleDateFormat("dd/MM/yyyy HH:mm aa").format(Date()).toString(),
+                userId = 1
             )
         )
         profiles.value = _profiles
+        viewModelScope.launch {
+            ProfileService.saveProfile(
+                ProfileModel(
+                    image = null,
+                    nickname = "cba",
+                    name = "cba",
+                    description = "cba",
+                    dateTime = SimpleDateFormat("dd/MM/yyyy HH:mm aa").format(Date()).toString(),
+                    userId = 1
+                )
+            )
+        }
         //view.findNavController().navigate(MainListFragmentDirections.actionMainListFragmentToAddEditProfileFragment())
     }
 }

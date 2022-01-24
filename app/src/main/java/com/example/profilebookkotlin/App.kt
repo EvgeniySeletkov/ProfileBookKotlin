@@ -5,8 +5,6 @@ import android.content.Context
 import com.example.profilebookkotlin.services.profile.ProfileService
 
 class App : Application() {
-    val profileService = ProfileService()
-
     init {
         instance = this
     }

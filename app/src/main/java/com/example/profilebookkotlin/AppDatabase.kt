@@ -4,16 +4,20 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.profilebookkotlin.models.profile.ProfileDao
+import com.example.profilebookkotlin.models.profile.ProfileModel
 import com.example.profilebookkotlin.models.user.UserDao
 import com.example.profilebookkotlin.models.user.UserModel
 
 @Database(
     entities = [
-        UserModel::class],
+        UserModel::class,
+        ProfileModel::class],
     version = 1,
     exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract val userDao : UserDao
+    abstract val profileDao: ProfileDao
 
     companion object{
         @Volatile

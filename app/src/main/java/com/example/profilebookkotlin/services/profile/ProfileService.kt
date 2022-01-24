@@ -1,80 +1,29 @@
 package com.example.profilebookkotlin.services.profile
 
+import com.example.profilebookkotlin.App
+import com.example.profilebookkotlin.AppDatabase
 import com.example.profilebookkotlin.models.profile.ProfileModel
 
-typealias ProfilesListener = (profiles: List<ProfileModel>) -> Unit
+//typealias ProfilesListener = (profiles: List<ProfileModel>) -> Unit
 
-public class ProfileService {
-    private var _profiles = mutableListOf<ProfileModel>()
-    private val _listeners = mutableSetOf<ProfilesListener>()
+object ProfileService {
+    private var _database: AppDatabase = AppDatabase.getInstance(App.applicationContext())
 
-    init {
-//        _profiles = listOf(
-//            Profile(
-//                id = 1,
-//                image = null,
-//                nickname = "abc",
-//                name = "abc",
-//                description = "abc",
-//                dateTime = Date(12, 1, 2022)
-//            ),
-//            Profile(
-//                id = 2,
-//                image = null,
-//                nickname = "abc",
-//                name = "abc",
-//                description = "abc",
-//                dateTime = Date(12, 1, 2022)
-//            ),
-//            Profile(
-//                id = 3,
-//                image = null,
-//                nickname = "abc",
-//                name = "abc",
-//                description = "abc",
-//                dateTime = Date(12, 1, 2022)
-//            ),
-//            Profile(
-//                id = 4,
-//                image = null,
-//                nickname = "abc",
-//                name = "abc",
-//                description = "abc",
-//                dateTime = Date(12, 1, 2022)
-//            ),
-//            Profile(
-//                id = 5,
-//                image = null,
-//                nickname = "abc",
-//                name = "abc",
-//                description = "abc",
-//                dateTime = Date(12, 1, 2022)
-//            ),
-//            Profile(
-//                id = 6,
-//                image = null,
-//                nickname = "abc",
-//                name = "abc",
-//                description = "abc",
-//                dateTime = Date(12, 1, 2022)
-//            )
-//        ).toMutableList()
+    suspend fun getAllProfiles() : List<ProfileModel>{
+        val userId = 1
+        return _database.profileDao.getAll(userId)
     }
 
-    public fun addListener(listener: ProfilesListener){
-        _listeners.add(listener)
-        listener.invoke(_profiles)
+    suspend fun saveProfile(profile: ProfileModel){
+        if (profile.id == 0){
+            _database.profileDao.insert(profile)
+        }
+        else {
+            _database.profileDao.update(profile)
+        }
     }
 
-    public fun removeListener(listener: ProfilesListener){
-        _listeners.remove(listener)
-    }
-
-    private fun notifyChanges(){
-        _listeners.forEach { it.invoke(_profiles) }
-    }
-
-    public fun getProfiles() : List<ProfileModel> {
-        return _profiles
+    suspend fun deleteProfile(profile: ProfileModel){
+        _database.profileDao.delete(profile)
     }
 }

@@ -39,7 +39,7 @@ class ProfilesAdapter(private val profiles: ArrayList<ProfileModel>)
             }
             profileNickname.text = profile.nickname
             profileName.text = profile.name
-            profileDate.text = SimpleDateFormat("dd/MM/yyyy HH:mm aa").format(profile.dateTime).toString()
+            profileDate.text = profile.dateTime
         }
     }
 }
