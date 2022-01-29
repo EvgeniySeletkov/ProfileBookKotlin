@@ -1,5 +1,7 @@
 package com.example.profilebookkotlin.views.adapters
 
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,7 +37,8 @@ class ProfilesAdapter(private val profiles: ArrayList<ProfileModel>)
 
         fun bind(profile: ProfileModel) = with(binding){
             if (profile.image != null){
-                profileImage.load(File(profile.image))
+                //profileImage.setImageURI(Uri.parse(profile.image))
+                profileImage.load(profile.image)
             }
             profileNickname.text = profile.nickname
             profileName.text = profile.name

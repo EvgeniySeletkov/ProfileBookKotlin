@@ -25,30 +25,30 @@ class MainListViewModel : ViewModel() {
     }
 
     fun onAddProfile(view: View){
-        _profiles.add(
-            ProfileModel(
-                id = 6,
-                image = null,
-                nickname = "cba",
-                name = "cba",
-                description = "cba",
-                dateTime = SimpleDateFormat("dd/MM/yyyy HH:mm aa").format(Date()).toString(),
-                userId = 1
-            )
-        )
-        profiles.value = _profiles
-        viewModelScope.launch {
-            ProfileService.saveProfile(
-                ProfileModel(
-                    image = null,
-                    nickname = "cba",
-                    name = "cba",
-                    description = "cba",
-                    dateTime = SimpleDateFormat("dd/MM/yyyy HH:mm aa").format(Date()).toString(),
-                    userId = 1
-                )
-            )
-        }
-        //view.findNavController().navigate(MainListFragmentDirections.actionMainListFragmentToAddEditProfileFragment())
+//        _profiles.add(
+//            ProfileModel(
+//                id = 6,
+//                image = null,
+//                nickname = "cba",
+//                name = "cba",
+//                description = "cba",
+//                dateTime = SimpleDateFormat("dd/MM/yyyy HH:mm aa").format(Date()).toString(),
+//                userId = 1
+//            )
+//        )
+//        profiles.value = _profiles
+//        viewModelScope.launch {
+//            ProfileService.saveProfile(
+//                ProfileModel(
+//                    image = null,
+//                    nickname = "cba",
+//                    name = "cba",
+//                    description = "cba",
+//                    dateTime = SimpleDateFormat("dd/MM/yyyy HH:mm aa").format(Date()).toString(),
+//                    userId = 1
+//                )
+//            )
+//        }
+        view.findNavController().navigate(MainListFragmentDirections.actionMainListFragmentToAddEditProfileFragment())
     }
 }

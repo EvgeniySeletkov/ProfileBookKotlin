@@ -7,6 +7,14 @@
     android:paddingHorizontal="40dp"
     android:paddingBottom="40dp">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.profilebookkotlin.viewmodels.AddEditViewModel" />
+
+    </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -31,12 +39,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:hint="NickName"/>
+                android:hint="NickName"
+                android:text="@={viewModel.nickname}"/>
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Name"/>
+                android:hint="Name"
+                android:text="@={viewModel.name}"/>
 
         </LinearLayout>
 
@@ -48,7 +58,14 @@
             android:gravity="start"
             android:paddingHorizontal="3dp"
             android:paddingVertical="5dp"
-            android:hint="Description"/>
+            android:hint="Description"
+            android:text="@={viewModel.description}"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:onClick="@{() -> viewModel.onSaveProfile()}"/>
 
     </LinearLayout>
 
