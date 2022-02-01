@@ -18,6 +18,7 @@ import kotlin.collections.ArrayList
 
 class ProfilesAdapter(private val profiles: ArrayList<ProfileModel>)
     : RecyclerView.Adapter<ProfilesAdapter.ProfilesViewHolder>() {
+    var onItemLongClickListener: ((ProfileModel) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfilesViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_profile, parent, false)
@@ -32,8 +33,15 @@ class ProfilesAdapter(private val profiles: ArrayList<ProfileModel>)
         return profiles.size
     }
 
-    class ProfilesViewHolder(item: View) : RecyclerView.ViewHolder(item){
+    inner class ProfilesViewHolder(item: View) : RecyclerView.ViewHolder(item){
         val binding = ItemProfileBinding.bind(item)
+
+        init {
+            item.setOnLongClickListener {
+                onItemLongClickListener?.invoke(profiles[adapterPosition])
+                return@setOnLongClickListener true
+            }
+        }
 
         fun bind(profile: ProfileModel) = with(binding){
             if (profile.image != null){

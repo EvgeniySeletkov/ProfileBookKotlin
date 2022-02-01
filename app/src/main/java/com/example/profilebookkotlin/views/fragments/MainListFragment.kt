@@ -1,7 +1,9 @@
 package com.example.profilebookkotlin.views.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -33,7 +35,11 @@ class MainListFragment : Fragment() {
         binding.recyclerView.layoutManager = layoutManager
 
         viewModel.profiles.observe(viewLifecycleOwner, Observer {
-            binding.recyclerView.adapter = ProfilesAdapter(it)
+            val adapter = ProfilesAdapter(it)
+            adapter.onItemLongClickListener = { profile ->
+                registerForContextMenu()
+            }
+            binding.recyclerView.adapter = adapter
         })
 
         setHasOptionsMenu(true)
@@ -44,5 +50,15 @@ class MainListFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.main_list_navbar_menu, menu)
+    }
+
+    override fun onCreateContextMenu(
+        menu: ContextMenu,
+        v: View,
+        menuInfo: ContextMenu.ContextMenuInfo?
+    ) {
+        super.onCreateContextMenu(menu, v, menuInfo)
+        menu.add(Menu.NONE, 0, Menu.NONE, "Редактировать")
+        menu.add(Menu.NONE, 1, Menu.NONE, "Удалить")
     }
 }
