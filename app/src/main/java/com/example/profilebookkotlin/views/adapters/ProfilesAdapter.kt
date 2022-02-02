@@ -1,25 +1,17 @@
 package com.example.profilebookkotlin.views.adapters
 
-import android.graphics.BitmapFactory
-import android.net.Uri
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.profilebookkotlin.R
 import com.example.profilebookkotlin.databinding.ItemProfileBinding
 import com.example.profilebookkotlin.models.profile.ProfileModel
-import java.io.File
-import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class ProfilesAdapter(private val profiles: ArrayList<ProfileModel>)
-    : RecyclerView.Adapter<ProfilesAdapter.ProfilesViewHolder>() {
-    var onItemLongClickListener: ((ProfileModel) -> Unit)? = null
-
+    : RecyclerView.Adapter<ProfilesAdapter.ProfilesViewHolder>(), View.OnLongClickListener{
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfilesViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_profile, parent, false)
         return ProfilesViewHolder(view)
@@ -33,15 +25,19 @@ class ProfilesAdapter(private val profiles: ArrayList<ProfileModel>)
         return profiles.size
     }
 
-    inner class ProfilesViewHolder(item: View) : RecyclerView.ViewHolder(item){
-        val binding = ItemProfileBinding.bind(item)
+    override fun onLongClick(view: View): Boolean {
+        showPopupMenu(view)
+        return true
+    }
 
-        init {
-            item.setOnLongClickListener {
-                onItemLongClickListener?.invoke(profiles[adapterPosition])
-                return@setOnLongClickListener true
-            }
-        }
+    private fun showPopupMenu(view: View) {
+        val popupMenu = PopupMenu(view.context, view)
+        popupMenu.menu.add(Menu.NONE, 0, Menu.NONE, "Редактировать")
+        popupMenu.menu.add(Menu.NONE, 1, Menu.NONE, "Удалить")
+    }
+
+    class ProfilesViewHolder(item: View) : RecyclerView.ViewHolder(item){
+        val binding = ItemProfileBinding.bind(item)
 
         fun bind(profile: ProfileModel) = with(binding){
             if (profile.image != null){

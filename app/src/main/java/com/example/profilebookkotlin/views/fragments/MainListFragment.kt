@@ -37,7 +37,7 @@ class MainListFragment : Fragment() {
         viewModel.profiles.observe(viewLifecycleOwner, Observer {
             val adapter = ProfilesAdapter(it)
             adapter.onItemLongClickListener = { profile ->
-                registerForContextMenu()
+                registerForContextMenu(binding.recyclerView)
             }
             binding.recyclerView.adapter = adapter
         })
@@ -60,5 +60,14 @@ class MainListFragment : Fragment() {
         super.onCreateContextMenu(menu, v, menuInfo)
         menu.add(Menu.NONE, 0, Menu.NONE, "Редактировать")
         menu.add(Menu.NONE, 1, Menu.NONE, "Удалить")
+    }
+
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        return super.onContextItemSelected(item)
+
+        when (item.itemId){
+            0 -> {}
+            1 -> {}
+        }
     }
 }
