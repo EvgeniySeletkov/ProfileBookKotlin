@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.profilebookkotlin.R
 import com.example.profilebookkotlin.views.adapters.ProfilesAdapter
 import com.example.profilebookkotlin.databinding.FragmentMainListBinding
+import com.example.profilebookkotlin.models.profile.ProfileModel
 import com.example.profilebookkotlin.viewmodels.MainListViewModel
+import com.example.profilebookkotlin.views.adapters.ProfileActionListener
 
 class MainListFragment : Fragment() {
     private lateinit var binding: FragmentMainListBinding
@@ -34,11 +36,18 @@ class MainListFragment : Fragment() {
         val layoutManager = LinearLayoutManager(activity)
         binding.recyclerView.layoutManager = layoutManager
 
-        viewModel.profiles.observe(viewLifecycleOwner, Observer {
-            val adapter = ProfilesAdapter(it)
-            adapter.onItemLongClickListener = { profile ->
-                registerForContextMenu(binding.recyclerView)
+        val profileActionListener = object : ProfileActionListener{
+            override fun onEditProfile(profile: ProfileModel) {
+                viewModel.onEditProfile(profile)
             }
+
+            override fun onDeleteProfile(profile: ProfileModel) {
+                viewModel.onDeleteProfile(profile)
+            }
+        }
+
+        viewModel.profiles.observe(viewLifecycleOwner, Observer {
+            val adapter = ProfilesAdapter(it, profileActionListener)
             binding.recyclerView.adapter = adapter
         })
 

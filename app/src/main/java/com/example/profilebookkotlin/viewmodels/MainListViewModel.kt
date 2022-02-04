@@ -51,4 +51,14 @@ class MainListViewModel : ViewModel() {
 //        }
         view.findNavController().navigate(MainListFragmentDirections.actionMainListFragmentToAddEditProfileFragment())
     }
+
+    fun onEditProfile(profile: ProfileModel){
+
+    }
+
+    fun onDeleteProfile(profile: ProfileModel){
+        viewModelScope.launch {
+            ProfileService.deleteProfile(profile)
+        }
+    }
 }

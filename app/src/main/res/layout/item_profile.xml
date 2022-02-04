@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:paddingVertical="20dp"
-    android:paddingHorizontal="20dp">
+    android:paddingHorizontal="20dp"
+    android:background="?android:attr/selectableItemBackground">
 
     <ImageView
         android:id="@+id/profileImage"
