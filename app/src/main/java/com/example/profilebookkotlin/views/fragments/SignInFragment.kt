@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.profilebookkotlin.R
 import com.example.profilebookkotlin.databinding.FragmentSignInBinding
 import com.example.profilebookkotlin.viewmodels.SignInViewModel
@@ -27,6 +28,14 @@ class SignInFragment : Fragment() {
         viewModel = ViewModelProvider(this)[SignInViewModel::class.java]
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+
+        val liveData = findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<String>(SignUpFragment.LOGIN)
+        liveData?.observe(viewLifecycleOwner){ login ->
+            if (login != null){
+                viewModel.login.value = login
+                liveData.value = null
+            }
+        }
 
         return binding.root
     }

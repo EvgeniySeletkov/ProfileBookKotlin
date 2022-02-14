@@ -31,4 +31,8 @@ class SignUpFragment : Fragment() {
 
         return binding.root
     }
+
+    companion object{
+        const val LOGIN = "LOGIN"
+    }
 }
