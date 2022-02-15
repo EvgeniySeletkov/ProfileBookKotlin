@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
+import com.example.profilebookkotlin.services.authorization.AuthorizationService
 
 class MainActivity : AppCompatActivity() {
     private var _navController: NavController? = null
@@ -17,6 +18,8 @@ class MainActivity : AppCompatActivity() {
 
         val navController = findNavController(R.id.navHostFragment)
         onNavControllerActivated(navController)
+
+        prepareRootNavController(navController)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -29,6 +32,19 @@ class MainActivity : AppCompatActivity() {
             navController.addOnDestinationChangedListener(destinationListener)
             _navController = navController
         }
+    }
+
+    private fun prepareRootNavController(navController: NavController) {
+        val graph = navController.navInflater.inflate(R.navigation.navigation)
+
+        val fragmentId = if (AuthorizationService.isAuthorized) {
+            R.id.mainListFragment
+        } else {
+            R.id.signInFragment2
+        }
+
+        graph.startDestination = fragmentId
+        navController.graph = graph
     }
 
     private val destinationListener = NavController.OnDestinationChangedListener { _, destination, _ ->
