@@ -6,10 +6,8 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.profilebookkotlin.App
-import com.example.profilebookkotlin.R
 import com.example.profilebookkotlin.databinding.ItemProfileBinding
 import com.example.profilebookkotlin.models.profile.ProfileModel
-import com.example.profilebookkotlin.services.profile.ProfileService
 import java.util.*
 
 interface ProfileActionListener{
@@ -61,12 +59,12 @@ class ProfilesAdapter(private val profiles: ArrayList<ProfileModel>,
         when (itemId) {
             0 -> {
                 //actionListener.onEditProfile(profile)
-                Toast.makeText(App.applicationContext(), "Edit", Toast.LENGTH_SHORT).show()
+                Toast.makeText(App.getContext(), "Edit", Toast.LENGTH_SHORT).show()
             }
             1 -> {
                 //actionListener.onDeleteProfile(profile)
                 //profiles.remove(profile)
-                Toast.makeText(App.applicationContext(), "Delete", Toast.LENGTH_SHORT).show()
+                Toast.makeText(App.getContext(), "Delete", Toast.LENGTH_SHORT).show()
             }
         }
         return true

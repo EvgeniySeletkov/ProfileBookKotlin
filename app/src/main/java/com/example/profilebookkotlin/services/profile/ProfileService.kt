@@ -7,7 +7,7 @@ import com.example.profilebookkotlin.models.profile.ProfileModel
 //typealias ProfilesListener = (profiles: List<ProfileModel>) -> Unit
 
 object ProfileService {
-    private var _database: AppDatabase = AppDatabase.getInstance(App.applicationContext())
+    private var _database: AppDatabase = AppDatabase.getInstance(App.getContext())
 
     suspend fun getAllProfiles() : List<ProfileModel>{
         val userId = 1
