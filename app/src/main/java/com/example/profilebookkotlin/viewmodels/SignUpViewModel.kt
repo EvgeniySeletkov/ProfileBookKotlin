@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
+import com.example.profilebookkotlin.Constants
 import com.example.profilebookkotlin.MainActivity
 import com.example.profilebookkotlin.models.user.UserModel
 import com.example.profilebookkotlin.services.authorization.AuthorizationService
@@ -33,7 +34,7 @@ class SignUpViewModel : ViewModel() {
                         if (user != null){
                             AuthorizationService.signUp(user)
 
-                            view.findNavController().previousBackStackEntry?.savedStateHandle?.set(SignUpFragment.LOGIN, login.value)
+                            view.findNavController().previousBackStackEntry?.savedStateHandle?.set(Constants.LOGIN, login.value)
                             view.findNavController().popBackStack()
                         }
                     }

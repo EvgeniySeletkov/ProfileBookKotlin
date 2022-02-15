@@ -1,10 +1,12 @@
 package com.example.profilebookkotlin.viewmodels
 
+import android.app.AlertDialog
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
+import com.example.profilebookkotlin.MainActivity
 import com.example.profilebookkotlin.R
 import com.example.profilebookkotlin.services.authorization.AuthorizationService
 import com.example.profilebookkotlin.views.fragments.SignInFragmentDirections
@@ -28,6 +30,20 @@ class SignInViewModel : ViewModel() {
             if (isAuthorize){
                 view.findNavController().navigate(SignInFragmentDirections.actionSignInFragment2ToMainListFragment())
             }
+            else {
+                showErrorAlert("Invalid login or password!")
+            }
         }
+    }
+
+    private fun showErrorAlert(message: String){
+        val builder = AlertDialog.Builder(MainActivity.instance)
+        builder.setTitle("Alert")
+            .setMessage(message)
+            .setPositiveButton("OK") { dialog, which ->
+                dialog.cancel()
+            }.create()
+
+        builder.show()
     }
 }

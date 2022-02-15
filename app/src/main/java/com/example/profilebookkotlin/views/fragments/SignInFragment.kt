@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.profilebookkotlin.Constants
 import com.example.profilebookkotlin.R
 import com.example.profilebookkotlin.databinding.FragmentSignInBinding
 import com.example.profilebookkotlin.viewmodels.SignInViewModel
@@ -29,7 +30,9 @@ class SignInFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        val liveData = findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<String>(SignUpFragment.LOGIN)
+        binding.signInButton.isEnabled = false
+
+        val liveData = findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<String>(Constants.LOGIN)
         liveData?.observe(viewLifecycleOwner){ login ->
             if (login != null){
                 viewModel.login.value = login
@@ -37,6 +40,19 @@ class SignInFragment : Fragment() {
             }
         }
 
+        viewModel.login.observe(viewLifecycleOwner){
+            binding.signInButton.isEnabled = !hasEmptyFields()
+        }
+
+        viewModel.password.observe(viewLifecycleOwner){
+            binding.signInButton.isEnabled = !hasEmptyFields()
+        }
+
         return binding.root
+    }
+
+    private fun hasEmptyFields() : Boolean{
+        return viewModel.login.value.isNullOrBlank()
+                || viewModel.password.value.isNullOrBlank()
     }
 }

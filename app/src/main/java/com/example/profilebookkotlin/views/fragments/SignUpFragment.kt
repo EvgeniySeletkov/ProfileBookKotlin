@@ -51,8 +51,4 @@ class SignUpFragment : Fragment() {
                 || viewModel.password.value.isNullOrBlank()
                 || viewModel.confirmPassword.value.isNullOrBlank()
     }
-
-    companion object{
-        const val LOGIN = "LOGIN"
-    }
 }
