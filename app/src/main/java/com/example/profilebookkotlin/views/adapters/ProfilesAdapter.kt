@@ -29,7 +29,10 @@ class ProfilesAdapter(private val profiles: ArrayList<ProfileModel>,
     }
 
     override fun onBindViewHolder(holder: ProfilesViewHolder, position: Int) {
-        holder.bind(profiles[position])
+        val profile = profiles[position]
+        holder.itemView.tag = profile
+        holder.bind(profile)
+
     }
 
     override fun getItemCount(): Int {
@@ -37,17 +40,10 @@ class ProfilesAdapter(private val profiles: ArrayList<ProfileModel>,
     }
 
     override fun onClick(view: View) {
-        //val profile = view.tag as ProfileModel
         showPopupMenu(view)
     }
 
-//    override fun onLongClick(view: View): Boolean {
-//        showPopupMenu(view)
-//        return true
-//    }
-
     private fun showPopupMenu(view: View) {
-        //val profile = view.tag as ProfileModel
         val popupMenu = PopupMenu(view.context, view)
         popupMenu.menu.add(Menu.NONE, 0, Menu.NONE, "Редактировать")
         popupMenu.menu.add(Menu.NONE, 1, Menu.NONE, "Удалить")
@@ -56,7 +52,7 @@ class ProfilesAdapter(private val profiles: ArrayList<ProfileModel>,
     }
 
     private fun selectMenuItem (itemId: Int, view: View) : Boolean{
-        //val profile = view.tag as ProfileModel
+        val profile = view.tag as ProfileModel
 
         when (itemId) {
             0 -> {
@@ -64,9 +60,9 @@ class ProfilesAdapter(private val profiles: ArrayList<ProfileModel>,
                 Toast.makeText(App.getContext(), "Edit", Toast.LENGTH_SHORT).show()
             }
             1 -> {
-                //actionListener.onDeleteProfile(profile)
-                //profiles.remove(profile)
-                Toast.makeText(App.getContext(), "Delete", Toast.LENGTH_SHORT).show()
+                actionListener.onDeleteProfile(profile)
+                profiles.remove(profile)
+                notifyDataSetChanged()
             }
         }
         return true
