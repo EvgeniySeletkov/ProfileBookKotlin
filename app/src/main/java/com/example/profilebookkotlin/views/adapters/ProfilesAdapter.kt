@@ -1,14 +1,16 @@
 package com.example.profilebookkotlin.views.adapters
 
-import android.view.*
+import android.net.Uri
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.View
+import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
 import com.example.profilebookkotlin.App
 import com.example.profilebookkotlin.databinding.ItemProfileBinding
 import com.example.profilebookkotlin.models.profile.ProfileModel
-import java.util.*
 
 interface ProfileActionListener{
     fun onEditProfile(profile: ProfileModel)
@@ -35,7 +37,7 @@ class ProfilesAdapter(private val profiles: ArrayList<ProfileModel>,
     }
 
     override fun onClick(view: View) {
-        val profile = view.tag as ProfileModel
+        //val profile = view.tag as ProfileModel
         showPopupMenu(view)
     }
 
@@ -45,7 +47,7 @@ class ProfilesAdapter(private val profiles: ArrayList<ProfileModel>,
 //    }
 
     private fun showPopupMenu(view: View) {
-        val profile = view.tag as ProfileModel
+        //val profile = view.tag as ProfileModel
         val popupMenu = PopupMenu(view.context, view)
         popupMenu.menu.add(Menu.NONE, 0, Menu.NONE, "Редактировать")
         popupMenu.menu.add(Menu.NONE, 1, Menu.NONE, "Удалить")
@@ -54,7 +56,7 @@ class ProfilesAdapter(private val profiles: ArrayList<ProfileModel>,
     }
 
     private fun selectMenuItem (itemId: Int, view: View) : Boolean{
-        val profile = view.tag as ProfileModel
+        //val profile = view.tag as ProfileModel
 
         when (itemId) {
             0 -> {
@@ -76,8 +78,8 @@ class ProfilesAdapter(private val profiles: ArrayList<ProfileModel>,
 
         fun bind(profile: ProfileModel) = with(binding){
             if (profile.image != null){
-                //profileImage.setImageURI(Uri.parse(profile.image))
-                profileImage.load(profile.image)
+                val image = Uri.parse(profile.image)
+                profileImage.setImageURI(image)
             }
             profileNickname.text = profile.nickname
             profileName.text = profile.name
