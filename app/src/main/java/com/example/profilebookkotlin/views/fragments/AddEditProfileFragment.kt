@@ -2,39 +2,30 @@ package com.example.profilebookkotlin.views.fragments
 
 import android.app.Activity.RESULT_OK
 import android.app.AlertDialog
-import android.content.Context
-import android.content.ContextWrapper
 import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
 import android.provider.MediaStore
-import android.util.Log
 import android.view.*
-import androidx.core.net.toFile
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.profilebookkotlin.Constants
 import com.example.profilebookkotlin.R
 import com.example.profilebookkotlin.databinding.FragmentAddEditProfileBinding
 import com.example.profilebookkotlin.services.image.ImageService
 import com.example.profilebookkotlin.viewmodels.AddEditViewModel
-import java.io.File
-import java.io.FileOutputStream
-import java.io.OutputStream
-import java.net.URI
-import java.sql.Wrapper
-import java.util.*
 
 class AddEditProfileFragment : Fragment() {
     private lateinit var binding: FragmentAddEditProfileBinding
     private lateinit var viewModel: AddEditViewModel
+    private val args by navArgs<AddEditProfileFragmentArgs>()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,6 +43,17 @@ class AddEditProfileFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         binding.profileImage.setOnClickListener { onAddProfileImage() }
+
+        if (args.profileId != 0){
+            viewModel.initializeProfileById(args.profileId)
+        }
+
+        viewModel.image.observe(viewLifecycleOwner, Observer {
+            if (it != null){
+                val image = Uri.parse(it)
+                binding.profileImage.setImageURI(image)
+            }
+        })
 
         setHasOptionsMenu(true)
 
@@ -108,7 +110,6 @@ class AddEditProfileFragment : Fragment() {
         when (requestCode){
             Constants.GALLERY_REQUEST -> {
                 if (resultCode == RESULT_OK) {
-                    binding.profileImage.setImageURI(data?.data)
                     val imagePath = ImageService.saveImageFromUri(this.context, data?.data!!)
                     viewModel.image.value = imagePath
                 }

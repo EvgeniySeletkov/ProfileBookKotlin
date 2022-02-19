@@ -56,8 +56,7 @@ class ProfilesAdapter(private val profiles: ArrayList<ProfileModel>,
 
         when (itemId) {
             0 -> {
-                //actionListener.onEditProfile(profile)
-                Toast.makeText(App.getContext(), "Edit", Toast.LENGTH_SHORT).show()
+                actionListener.onEditProfile(profile)
             }
             1 -> {
                 actionListener.onDeleteProfile(profile)

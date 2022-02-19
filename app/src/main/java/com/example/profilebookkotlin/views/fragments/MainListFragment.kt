@@ -39,7 +39,7 @@ class MainListFragment : Fragment() {
 
         val profileActionListener = object : ProfileActionListener{
             override fun onEditProfile(profile: ProfileModel) {
-                viewModel.onEditProfile(profile)
+                findNavController().navigate(MainListFragmentDirections.actionMainListFragmentToAddEditProfileFragment(profile.id))
             }
 
             override fun onDeleteProfile(profile: ProfileModel) {

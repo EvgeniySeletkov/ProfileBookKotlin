@@ -42,5 +42,10 @@
         android:id="@+id/addEditProfileFragment"
         android:name="com.example.profilebookkotlin.views.fragments.AddEditProfileFragment"
         android:label="fragment_add_edit_profile"
-        tools:layout="@layout/fragment_add_edit_profile" />
+        tools:layout="@layout/fragment_add_edit_profile">
+        <argument
+            android:name="profileId"
+            app:argType="integer"
+            android:defaultValue="0"/>
+    </fragment>
 </navigation>

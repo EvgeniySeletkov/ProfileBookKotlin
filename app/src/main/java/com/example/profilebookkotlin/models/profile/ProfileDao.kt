@@ -15,4 +15,7 @@ interface ProfileDao {
 
     @Query("SELECT * from profile WHERE userId = :userId")
     suspend fun getAll(userId: Int) : List<ProfileModel>
+
+    @Query("SELECT * from profile WHERE id = :id")
+    suspend fun getProfileById(id: Int) : ProfileModel
 }

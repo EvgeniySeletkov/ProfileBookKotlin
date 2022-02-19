@@ -16,6 +16,10 @@ object ProfileService {
         return _database.profileDao.getAll(userId)
     }
 
+    suspend fun getProfileById(id: Int) : ProfileModel{
+        return _database.profileDao.getProfileById(id)
+    }
+
     suspend fun saveProfile(profile: ProfileModel){
         if (profile.userId == 0){
             profile.userId = _preferences.getInt(Constants.USER_ID, 0)

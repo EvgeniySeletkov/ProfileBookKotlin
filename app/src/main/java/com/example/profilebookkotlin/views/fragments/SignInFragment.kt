@@ -52,7 +52,6 @@ class SignInFragment : Fragment() {
     }
 
     private fun hasEmptyFields() : Boolean{
-        return viewModel.login.value.isNullOrBlank()
-                || viewModel.password.value.isNullOrBlank()
+        return viewModel.login.value.isNullOrBlank() || viewModel.password.value.isNullOrBlank()
     }
 }
