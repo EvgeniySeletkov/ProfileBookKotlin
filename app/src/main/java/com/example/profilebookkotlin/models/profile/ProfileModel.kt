@@ -10,7 +10,7 @@ data class ProfileModel (
     val image: String?,
     val nickname: String,
     val name: String,
-    val description: String,
+    val description: String?,
     val dateTime: String,
-    val userId: Int
+    var userId: Int
     )

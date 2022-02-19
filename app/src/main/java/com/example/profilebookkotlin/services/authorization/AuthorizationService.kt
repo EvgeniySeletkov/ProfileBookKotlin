@@ -10,6 +10,7 @@ import com.example.profilebookkotlin.models.user.UserModel
 object AuthorizationService{
     private val _database: AppDatabase = AppDatabase.getInstance(App.getContext())
     private val _preferences = App.getContext().getSharedPreferences(Constants.APP_PREFERENCES, Context.MODE_PRIVATE)
+
     val isAuthorized = _preferences.getInt(Constants.USER_ID, 0) != 0
 
     suspend fun signIn(login: String, password: String): Boolean {
@@ -34,5 +35,11 @@ object AuthorizationService{
         val user = _database.userDao.get(login)
 
         return user != null
+    }
+
+    fun logout(){
+        _preferences.edit()
+            .putInt(Constants.USER_ID, 0)
+            .apply()
     }
 }

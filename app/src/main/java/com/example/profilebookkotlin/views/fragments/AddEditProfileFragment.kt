@@ -18,6 +18,8 @@ import androidx.core.net.toFile
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.profilebookkotlin.Constants
 import com.example.profilebookkotlin.R
 import com.example.profilebookkotlin.databinding.FragmentAddEditProfileBinding
@@ -61,6 +63,18 @@ class AddEditProfileFragment : Fragment() {
         inflater.inflate(R.menu.add_edit_navbar_menu, menu)
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId){
+            R.id.save_action -> {
+                if (viewModel.onProfileSaved()){
+                    findNavController().popBackStack()
+                }
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
     private fun onAddProfileImage() {
         val builder = AlertDialog.Builder(activity)
         builder.setTitle("Title")
@@ -93,7 +107,7 @@ class AddEditProfileFragment : Fragment() {
 
         when (requestCode){
             Constants.GALLERY_REQUEST -> {
-                if (requestCode == RESULT_OK) {
+                if (resultCode == RESULT_OK) {
                     binding.profileImage.setImageURI(data?.data)
                     val imagePath = ImageService.saveImageFromUri(this.context, data?.data!!)
                     viewModel.image.value = imagePath

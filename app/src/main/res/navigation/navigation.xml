@@ -32,6 +32,11 @@
         <action
             android:id="@+id/action_mainListFragment_to_addEditProfileFragment"
             app:destination="@id/addEditProfileFragment" />
+        <action
+            android:id="@+id/action_mainListFragment_to_signInFragment2"
+            app:destination="@id/signInFragment2"
+            app:popUpTo="@id/mainListFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/addEditProfileFragment"

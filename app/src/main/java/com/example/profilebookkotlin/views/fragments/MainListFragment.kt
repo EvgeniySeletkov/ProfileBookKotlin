@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.profilebookkotlin.R
 import com.example.profilebookkotlin.views.adapters.ProfilesAdapter
@@ -56,27 +57,27 @@ class MainListFragment : Fragment() {
         return binding.root
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        viewModel.onGetProfiles()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.main_list_navbar_menu, menu)
     }
 
-    override fun onCreateContextMenu(
-        menu: ContextMenu,
-        v: View,
-        menuInfo: ContextMenu.ContextMenuInfo?
-    ) {
-        super.onCreateContextMenu(menu, v, menuInfo)
-        menu.add(Menu.NONE, 0, Menu.NONE, "Редактировать")
-        menu.add(Menu.NONE, 1, Menu.NONE, "Удалить")
-    }
-
-    override fun onContextItemSelected(item: MenuItem): Boolean {
-        return super.onContextItemSelected(item)
-
-        when (item.itemId){
-            0 -> {}
-            1 -> {}
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId){
+            R.id.logout_action -> {
+                viewModel.onLogout()
+                findNavController().navigate(MainListFragmentDirections.actionMainListFragmentToSignInFragment2())
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
+
+
     }
 }
