@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/signInFragment2"
         android:name="com.example.profilebookkotlin.views.fragments.SignInFragment"
-        android:label="fragment_sign_in"
+        android:label="Users SignIn"
         tools:layout="@layout/fragment_sign_in">
         <action
             android:id="@+id/action_signInFragment2_to_signUpFragment"
@@ -22,13 +22,13 @@
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.example.profilebookkotlin.views.fragments.SignUpFragment"
-        android:label="fragment_sign_up"
+        android:label="Users SignUp"
         tools:layout="@layout/fragment_sign_up" />
     <fragment
         android:id="@+id/mainListFragment"
         android:name="com.example.profilebookkotlin.views.fragments.MainListFragment"
-        android:label="fragment_main_list"
-        tools:layout="@layout/fragment_main_list" >
+        android:label="Main List"
+        tools:layout="@layout/fragment_main_list">
         <action
             android:id="@+id/action_mainListFragment_to_addEditProfileFragment"
             app:destination="@id/addEditProfileFragment" />
@@ -41,11 +41,14 @@
     <fragment
         android:id="@+id/addEditProfileFragment"
         android:name="com.example.profilebookkotlin.views.fragments.AddEditProfileFragment"
-        android:label="fragment_add_edit_profile"
+        android:label="{name}"
         tools:layout="@layout/fragment_add_edit_profile">
         <argument
             android:name="profileId"
-            app:argType="integer"
-            android:defaultValue="0"/>
+            android:defaultValue="0"
+            app:argType="integer" />
+        <argument
+            android:name="name"
+            app:argType="string" />
     </fragment>
 </navigation>

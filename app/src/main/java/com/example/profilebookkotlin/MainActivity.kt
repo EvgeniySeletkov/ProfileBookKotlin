@@ -7,6 +7,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import com.example.profilebookkotlin.services.authorization.AuthorizationService
+import java.util.regex.Pattern
 
 class MainActivity : AppCompatActivity() {
     private var _navController: NavController? = null
@@ -47,9 +48,29 @@ class MainActivity : AppCompatActivity() {
         navController.graph = graph
     }
 
-    private val destinationListener = NavController.OnDestinationChangedListener { _, destination, _ ->
-        //supportActionBar?.title = prepareTitle(destination.label, arguments)
+    private val destinationListener = NavController.OnDestinationChangedListener { _, destination, arguments ->
+        supportActionBar?.title = prepareTitle(destination.label, arguments)
         supportActionBar?.setDisplayHomeAsUpEnabled(!isStartDestination(destination))
+    }
+
+    private fun prepareTitle(label: CharSequence?, arguments: Bundle?): String {
+        if (label == null) return ""
+        val title = StringBuffer()
+        val fillInPattern = Pattern.compile("\\{(.+?)\\}")
+        val matcher = fillInPattern.matcher(label)
+        while (matcher.find()) {
+            val argName = matcher.group(1)
+            if (arguments != null && arguments.containsKey(argName)) {
+                matcher.appendReplacement(title, "")
+                title.append(arguments[argName].toString())
+            } else {
+                throw IllegalArgumentException(
+                    "Could not find $argName in $arguments to fill label $label"
+                )
+            }
+        }
+        matcher.appendTail(title)
+        return title.toString()
     }
 
     private fun isStartDestination(destination: NavDestination?): Boolean {

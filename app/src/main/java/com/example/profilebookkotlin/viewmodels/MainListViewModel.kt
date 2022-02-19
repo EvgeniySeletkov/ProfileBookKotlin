@@ -18,13 +18,6 @@ class MainListViewModel : ViewModel() {
     private var _profiles = arrayListOf<ProfileModel>()
     var profiles = MutableLiveData<ArrayList<ProfileModel>>()
 
-//    init {
-//        viewModelScope.launch {
-//            _profiles = ArrayList(ProfileService.getAllProfiles())
-//            profiles.value = _profiles
-//        }
-//    }
-
     fun onGetProfiles(){
         viewModelScope.launch {
             _profiles = ArrayList(ProfileService.getAllProfiles())
@@ -33,11 +26,7 @@ class MainListViewModel : ViewModel() {
     }
 
     fun onAddProfile(view: View){
-        view.findNavController().navigate(MainListFragmentDirections.actionMainListFragmentToAddEditProfileFragment())
-    }
-
-    fun onEditProfile(profile: ProfileModel){
-
+        view.findNavController().navigate(MainListFragmentDirections.actionMainListFragmentToAddEditProfileFragment(0, "Add Profile"))
     }
 
     fun onDeleteProfile(profile: ProfileModel){
