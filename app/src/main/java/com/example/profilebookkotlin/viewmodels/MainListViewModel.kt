@@ -5,13 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
+import com.example.profilebookkotlin.App
+import com.example.profilebookkotlin.R
 import com.example.profilebookkotlin.models.profile.ProfileModel
 import com.example.profilebookkotlin.services.authorization.AuthorizationService
 import com.example.profilebookkotlin.services.profile.ProfileService
 import com.example.profilebookkotlin.views.fragments.MainListFragmentDirections
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
-import java.util.*
 import kotlin.collections.ArrayList
 
 class MainListViewModel : ViewModel() {
@@ -26,7 +26,7 @@ class MainListViewModel : ViewModel() {
     }
 
     fun onAddProfile(view: View){
-        view.findNavController().navigate(MainListFragmentDirections.actionMainListFragmentToAddEditProfileFragment(0, "Add Profile"))
+        view.findNavController().navigate(MainListFragmentDirections.actionMainListFragmentToAddEditProfileFragment(0, App.getContext().getString(R.string.AddProfile)))
     }
 
     fun onDeleteProfile(profile: ProfileModel){

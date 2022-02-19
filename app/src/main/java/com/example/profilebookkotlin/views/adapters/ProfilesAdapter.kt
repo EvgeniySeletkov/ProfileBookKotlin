@@ -6,9 +6,9 @@ import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.profilebookkotlin.App
+import com.example.profilebookkotlin.R
 import com.example.profilebookkotlin.databinding.ItemProfileBinding
 import com.example.profilebookkotlin.models.profile.ProfileModel
 
@@ -45,8 +45,8 @@ class ProfilesAdapter(private val profiles: ArrayList<ProfileModel>,
 
     private fun showPopupMenu(view: View) {
         val popupMenu = PopupMenu(view.context, view)
-        popupMenu.menu.add(Menu.NONE, 0, Menu.NONE, "Редактировать")
-        popupMenu.menu.add(Menu.NONE, 1, Menu.NONE, "Удалить")
+        popupMenu.menu.add(Menu.NONE, 0, Menu.NONE, App.getContext().getString(R.string.Edit))
+        popupMenu.menu.add(Menu.NONE, 1, Menu.NONE, App.getContext().getString(R.string.Delete))
         popupMenu.setOnMenuItemClickListener { selectMenuItem(it.itemId, view) }
         popupMenu.show()
     }

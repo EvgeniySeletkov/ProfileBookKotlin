@@ -6,11 +6,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
+import com.example.profilebookkotlin.App
 import com.example.profilebookkotlin.Constants
 import com.example.profilebookkotlin.MainActivity
+import com.example.profilebookkotlin.R
 import com.example.profilebookkotlin.models.user.UserModel
 import com.example.profilebookkotlin.services.authorization.AuthorizationService
-import com.example.profilebookkotlin.views.fragments.SignUpFragment
 import kotlinx.coroutines.launch
 
 class SignUpViewModel : ViewModel() {
@@ -39,12 +40,12 @@ class SignUpViewModel : ViewModel() {
                         }
                     }
                     else {
-                        showErrorAlert("This login is busy!")
+                        showErrorAlert(App.getContext().getString(R.string.ThisLoginIsBusy))
                     }
                 }
             }
             else{
-                showErrorAlert("Password and confirm password fields are not matches!")
+                showErrorAlert(App.getContext().getString(R.string.PasswordsFieldsNotMatches))
             }
         }
     }
@@ -58,7 +59,7 @@ class SignUpViewModel : ViewModel() {
         }
         else{
             result = false
-            showErrorAlert("Login be at least 4 and no more than 16 and first symbol must not be a digit!")
+            showErrorAlert(App.getContext().getString(R.string.LoginIsInvalid))
         }
 
         return result
@@ -73,16 +74,16 @@ class SignUpViewModel : ViewModel() {
         }
         else{
             result = false
-            showErrorAlert("Password be at least 8 and no more than 16 and must contain at least one uppercase letter, one lowercase letter and one number!")
+            showErrorAlert(App.getContext().getString(R.string.PasswordIsInvalid))
         }
         return result
     }
 
     private fun showErrorAlert(message: String){
         val builder = AlertDialog.Builder(MainActivity.instance)
-        builder.setTitle("Alert")
+        builder.setTitle(App.getContext().getString(R.string.Alert))
             .setMessage(message)
-            .setPositiveButton("OK") { dialog, which ->
+            .setPositiveButton(App.getContext().getString(R.string.OK)) { dialog, which ->
                 dialog.cancel()
             }.create()
 

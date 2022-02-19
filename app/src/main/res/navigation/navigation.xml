@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/signInFragment2"
         android:name="com.example.profilebookkotlin.views.fragments.SignInFragment"
-        android:label="Users SignIn"
+        android:label="@string/UsersSignIn"
         tools:layout="@layout/fragment_sign_in">
         <action
             android:id="@+id/action_signInFragment2_to_signUpFragment"
@@ -22,12 +22,12 @@
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.example.profilebookkotlin.views.fragments.SignUpFragment"
-        android:label="Users SignUp"
+        android:label="@string/UserSignUp"
         tools:layout="@layout/fragment_sign_up" />
     <fragment
         android:id="@+id/mainListFragment"
         android:name="com.example.profilebookkotlin.views.fragments.MainListFragment"
-        android:label="Main List"
+        android:label="@string/MainList"
         tools:layout="@layout/fragment_main_list">
         <action
             android:id="@+id/action_mainListFragment_to_addEditProfileFragment"

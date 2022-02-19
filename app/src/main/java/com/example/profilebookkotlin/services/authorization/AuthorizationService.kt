@@ -1,7 +1,6 @@
 package com.example.profilebookkotlin.services.authorization
 
 import android.content.Context
-import android.text.BoringLayout
 import com.example.profilebookkotlin.App
 import com.example.profilebookkotlin.AppDatabase
 import com.example.profilebookkotlin.Constants

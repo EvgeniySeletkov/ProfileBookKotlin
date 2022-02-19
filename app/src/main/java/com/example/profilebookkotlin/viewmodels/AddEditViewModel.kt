@@ -4,7 +4,10 @@ import android.app.AlertDialog
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.profilebookkotlin.App
+import com.example.profilebookkotlin.Constants
 import com.example.profilebookkotlin.MainActivity
+import com.example.profilebookkotlin.R
 import com.example.profilebookkotlin.models.profile.ProfileModel
 import com.example.profilebookkotlin.services.profile.ProfileService
 import kotlinx.coroutines.launch
@@ -54,7 +57,7 @@ class AddEditViewModel : ViewModel() {
             result = true
         }
         else{
-            showErrorAlert("NickName or Name field is empty!")
+            showErrorAlert(App.getContext().getString(R.string.NickNameOrNameFieldIsEmpty))
         }
 
         return result
@@ -70,7 +73,7 @@ class AddEditViewModel : ViewModel() {
             nickname = nickname.value.toString(),
             name = name.value.toString(),
             description = description.value,
-            dateTime = SimpleDateFormat("dd/MM/yyyy HH:mm aa").format(Date()).toString(),
+            dateTime = SimpleDateFormat(Constants.DATE_OUTPUT_PATTERN).format(Date()).toString(),
             userId = 0
         )
     }
@@ -84,9 +87,9 @@ class AddEditViewModel : ViewModel() {
 
     private fun showErrorAlert(message: String){
         val builder = AlertDialog.Builder(MainActivity.instance)
-        builder.setTitle("Alert")
+        builder.setTitle(App.getContext().getString(R.string.Alert))
             .setMessage(message)
-            .setPositiveButton("OK") { dialog, which ->
+            .setPositiveButton(App.getContext().getString(R.string.OK)) { dialog, which ->
                 dialog.cancel()
             }.create()
 

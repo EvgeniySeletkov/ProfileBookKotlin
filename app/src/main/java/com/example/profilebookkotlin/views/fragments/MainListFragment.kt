@@ -1,21 +1,19 @@
 package com.example.profilebookkotlin.views.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.profilebookkotlin.R
-import com.example.profilebookkotlin.views.adapters.ProfilesAdapter
 import com.example.profilebookkotlin.databinding.FragmentMainListBinding
 import com.example.profilebookkotlin.models.profile.ProfileModel
 import com.example.profilebookkotlin.viewmodels.MainListViewModel
 import com.example.profilebookkotlin.views.adapters.ProfileActionListener
+import com.example.profilebookkotlin.views.adapters.ProfilesAdapter
 
 class MainListFragment : Fragment() {
     private lateinit var binding: FragmentMainListBinding
@@ -39,7 +37,7 @@ class MainListFragment : Fragment() {
 
         val profileActionListener = object : ProfileActionListener{
             override fun onEditProfile(profile: ProfileModel) {
-                findNavController().navigate(MainListFragmentDirections.actionMainListFragmentToAddEditProfileFragment(profile.id, "Edit Profile"))
+                findNavController().navigate(MainListFragmentDirections.actionMainListFragmentToAddEditProfileFragment(profile.id, getString(R.string.EditProfile)))
             }
 
             override fun onDeleteProfile(profile: ProfileModel) {

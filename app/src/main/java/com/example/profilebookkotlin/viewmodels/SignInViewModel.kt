@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
+import com.example.profilebookkotlin.App
 import com.example.profilebookkotlin.MainActivity
 import com.example.profilebookkotlin.R
 import com.example.profilebookkotlin.services.authorization.AuthorizationService
@@ -31,7 +32,7 @@ class SignInViewModel : ViewModel() {
                 view.findNavController().navigate(SignInFragmentDirections.actionSignInFragment2ToMainListFragment())
             }
             else {
-                showErrorAlert("Invalid login or password!")
+                showErrorAlert(App.getContext().getString(R.string.InvalidLoginOrPassword))
             }
         }
     }

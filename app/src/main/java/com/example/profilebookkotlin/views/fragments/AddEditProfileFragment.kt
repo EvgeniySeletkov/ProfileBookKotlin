@@ -79,10 +79,10 @@ class AddEditProfileFragment : Fragment() {
 
     private fun onAddProfileImage() {
         val builder = AlertDialog.Builder(activity)
-        builder.setTitle("Title")
+        builder.setTitle(getString(R.string.AddPhoto))
         builder.setItems(arrayOf(
-            "Gallery",
-            "Camera" ),
+            getString(R.string.Gallery),
+            getString(R.string.Camera) ),
             DialogInterface.OnClickListener { dialog, which ->
                 chooseAction(dialog, which)
             })

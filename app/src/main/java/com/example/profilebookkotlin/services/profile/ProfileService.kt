@@ -5,7 +5,6 @@ import com.example.profilebookkotlin.App
 import com.example.profilebookkotlin.AppDatabase
 import com.example.profilebookkotlin.Constants
 import com.example.profilebookkotlin.models.profile.ProfileModel
-import com.example.profilebookkotlin.services.authorization.AuthorizationService
 
 object ProfileService {
     private var _database: AppDatabase = AppDatabase.getInstance(App.getContext())
