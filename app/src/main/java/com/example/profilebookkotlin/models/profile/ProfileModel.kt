@@ -7,10 +7,10 @@ import androidx.room.PrimaryKey
 data class ProfileModel (
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    var image: String?,
-    var nickname: String,
-    var name: String,
-    var description: String?,
-    val dateTime: String,
-    var userId: Int
+    var image: String = "",
+    var nickname: String = "",
+    var name: String = "",
+    var description: String = "",
+    var dateTime: String = "",
+    var userId: Int = 0
     )

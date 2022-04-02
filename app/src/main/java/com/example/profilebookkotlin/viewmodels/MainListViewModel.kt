@@ -1,18 +1,16 @@
 package com.example.profilebookkotlin.viewmodels
 
-import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.findNavController
+import androidx.navigation.NavController
 import com.example.profilebookkotlin.App
 import com.example.profilebookkotlin.R
 import com.example.profilebookkotlin.models.profile.ProfileModel
-import com.example.profilebookkotlin.services.authorization.AuthorizationService
-import com.example.profilebookkotlin.services.profile.ProfileService
+import com.example.profilebookkotlin.services.AuthorizationService
+import com.example.profilebookkotlin.services.ProfileService
 import com.example.profilebookkotlin.views.fragments.MainListFragmentDirections
 import kotlinx.coroutines.launch
-import kotlin.collections.ArrayList
 
 class MainListViewModel : ViewModel() {
     private var _profiles = arrayListOf<ProfileModel>()
@@ -25,8 +23,8 @@ class MainListViewModel : ViewModel() {
         }
     }
 
-    fun onAddProfile(view: View){
-        view.findNavController().navigate(MainListFragmentDirections.actionMainListFragmentToAddEditProfileFragment(0, App.getContext().getString(R.string.AddProfile)))
+    fun onAddProfileTapped(navController: NavController){
+        navController.navigate(MainListFragmentDirections.actionMainListFragmentToAddEditProfileFragment(0, App.getContext().getString(R.string.AddProfile)))
     }
 
     fun onDeleteProfile(profile: ProfileModel){
@@ -35,7 +33,8 @@ class MainListViewModel : ViewModel() {
         }
     }
 
-    fun onLogout(){
+    fun onLogout(navController: NavController){
         AuthorizationService.logout()
+        navController.navigate(MainListFragmentDirections.actionMainListFragmentToSignInFragment2())
     }
 }

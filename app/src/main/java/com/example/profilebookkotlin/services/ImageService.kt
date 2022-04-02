@@ -1,4 +1,4 @@
-package com.example.profilebookkotlin.services.image
+package com.example.profilebookkotlin.services
 
 import android.content.Context
 import android.content.ContextWrapper

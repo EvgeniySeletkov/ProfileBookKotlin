@@ -1,33 +1,38 @@
 package com.example.profilebookkotlin.viewmodels
 
 import android.app.AlertDialog
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavController
 import com.example.profilebookkotlin.App
 import com.example.profilebookkotlin.Constants
-import com.example.profilebookkotlin.MainActivity
 import com.example.profilebookkotlin.R
 import com.example.profilebookkotlin.models.profile.ProfileModel
-import com.example.profilebookkotlin.services.profile.ProfileService
+import com.example.profilebookkotlin.services.ProfileService
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
 class AddEditViewModel : ViewModel() {
-    lateinit var profile: ProfileModel
+    private var profile = ProfileModel()
 
-    private val _image = MutableLiveData<String>()
-    val image: MutableLiveData<String> = _image
+    val image: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
 
-    private val _nickname = MutableLiveData<String>()
-    val nickname: MutableLiveData<String> = _nickname
+    val nickname: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
 
-    private val _name = MutableLiveData<String>()
-    val name: MutableLiveData<String> = _name
+    val name: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
 
-    private val _description = MutableLiveData<String>()
-    val description: MutableLiveData<String> = _description
+    val description: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
 
     fun initializeProfileById(id: Int){
         viewModelScope.launch {
@@ -39,54 +44,36 @@ class AddEditViewModel : ViewModel() {
         }
     }
 
-    fun onProfileSaved() : Boolean{
-        var result = false
+    fun onProfileSave(navController: NavController, context: Context){
+        profile.image = if (image.value != null) image.value.toString() else ""
+        profile.nickname = nickname.value.toString()
+        profile.name = name.value.toString()
+        profile.description = if (description.value != null) description.value.toString() else ""
 
         if (!hasEmptyFields()){
-            if (!this::profile.isInitialized){
-                profile = createProfile()
-            }
-            else{
-                editProfile()
-            }
-
             viewModelScope.launch {
-                ProfileService.saveProfile(profile)
+                if (profile.userId == 0){
+                    profile.dateTime = SimpleDateFormat(Constants.DATE_OUTPUT_PATTERN).format(Date()).toString()
+                    ProfileService.addProfile(profile)
+                }
+                else {
+                    ProfileService.editProfile(profile)
+                }
             }
 
-            result = true
+            navController.popBackStack()
         }
         else{
-            showErrorAlert(App.getContext().getString(R.string.NickNameOrNameFieldIsEmpty))
+            showErrorAlert(context, context.getString(R.string.NickNameOrNameFieldIsEmpty))
         }
-
-        return result
     }
 
     private fun hasEmptyFields() : Boolean{
         return nickname.value.isNullOrBlank() || name.value.isNullOrBlank()
     }
 
-    private fun createProfile() : ProfileModel{
-        return ProfileModel(
-            image = image.value,
-            nickname = nickname.value.toString(),
-            name = name.value.toString(),
-            description = description.value,
-            dateTime = SimpleDateFormat(Constants.DATE_OUTPUT_PATTERN).format(Date()).toString(),
-            userId = 0
-        )
-    }
-
-    private fun editProfile() {
-        profile.image = image.value
-        profile.nickname = nickname.value.toString()
-        profile.name = name.value.toString()
-        profile.description = description.value
-    }
-
-    private fun showErrorAlert(message: String){
-        val builder = AlertDialog.Builder(MainActivity.instance)
+    private fun showErrorAlert(context: Context, message: String){
+        val builder = AlertDialog.Builder(context)
         builder.setTitle(App.getContext().getString(R.string.Alert))
             .setMessage(message)
             .setPositiveButton(App.getContext().getString(R.string.OK)) { dialog, which ->

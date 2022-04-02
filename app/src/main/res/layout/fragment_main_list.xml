@@ -22,12 +22,12 @@
             android:layout_height="match_parent" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/add_profile_button"
             android:layout_gravity="bottom|end"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:src="@drawable/ic_add"
-            style="@style/FloatingActionButton"
-            android:onClick="@{(view) -> viewModel.onAddProfile(view)}" />
+            style="@style/FloatingActionButton" />
 
     </FrameLayout>
 

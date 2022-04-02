@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.profilebookkotlin.Constants
 import com.example.profilebookkotlin.R
@@ -16,6 +17,7 @@ import com.example.profilebookkotlin.viewmodels.SignInViewModel
 class SignInFragment : Fragment() {
     private lateinit var binding: FragmentSignInBinding
     private lateinit var viewModel: SignInViewModel
+    private lateinit var navController: NavController
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,10 +31,25 @@ class SignInFragment : Fragment() {
         viewModel = ViewModelProvider(this)[SignInViewModel::class.java]
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        navController = findNavController()
 
-        binding.signInButton.isEnabled = false
+        return binding.root
+    }
 
-        val liveData = findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<String>(Constants.LOGIN)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setOnClickListeners()
+        observe()
+    }
+
+    private fun setOnClickListeners() {
+        binding.signInButton.setOnClickListener { viewModel.onSignInTapped(navController, requireContext()) }
+        binding.signUpButton.setOnClickListener { viewModel.onSignUpTapped(navController) }
+    }
+
+    private fun observe() {
+        val liveData = navController.currentBackStackEntry?.savedStateHandle?.getLiveData<String>(Constants.LOGIN)
         liveData?.observe(viewLifecycleOwner){ login ->
             if (login != null){
                 viewModel.login.value = login
@@ -47,8 +64,6 @@ class SignInFragment : Fragment() {
         viewModel.password.observe(viewLifecycleOwner){
             binding.signInButton.isEnabled = !hasEmptyFields()
         }
-
-        return binding.root
     }
 
     private fun hasEmptyFields() : Boolean{

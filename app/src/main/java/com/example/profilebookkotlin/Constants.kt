@@ -1,10 +1,6 @@
 package com.example.profilebookkotlin
 
 object Constants {
-    // Shared preferences
-    const val APP_PREFERENCES = "APP_PREFERENCES"
-    const val USER_ID = "USER_ID"
-
     // Navigation arguments
     const val LOGIN = "LOGIN"
 

@@ -2,7 +2,6 @@ package com.example.profilebookkotlin
 
 import android.app.Application
 import android.content.Context
-import com.example.profilebookkotlin.services.profile.ProfileService
 
 class App : Application() {
     init {

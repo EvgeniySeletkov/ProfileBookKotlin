@@ -1,56 +1,58 @@
 package com.example.profilebookkotlin.viewmodels
 
 import android.app.AlertDialog
-import android.view.View
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.findNavController
+import androidx.navigation.NavController
 import com.example.profilebookkotlin.App
 import com.example.profilebookkotlin.Constants
-import com.example.profilebookkotlin.MainActivity
 import com.example.profilebookkotlin.R
 import com.example.profilebookkotlin.models.user.UserModel
-import com.example.profilebookkotlin.services.authorization.AuthorizationService
+import com.example.profilebookkotlin.services.AuthorizationService
 import kotlinx.coroutines.launch
 
 class SignUpViewModel : ViewModel() {
-    private var _login = MutableLiveData<String>()
-    var login: MutableLiveData<String> = _login
+    val login: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
 
-    private val _password = MutableLiveData<String>()
-    val password: MutableLiveData<String> = _password
+    val password: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
 
-    private val _confirmPassword = MutableLiveData<String>()
-    val confirmPassword: MutableLiveData<String> = _confirmPassword
+    val confirmPassword: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
 
-    fun onSignUpClick(view: View){
-        if (hasValidLogin()
-            && hasValidPassword()){
+    fun onSignUpTapped(navController: NavController, context: Context){
+        if (hasValidLogin(context)
+            && hasValidPassword(context)){
             if(password.value == confirmPassword.value){
                 viewModelScope.launch {
-                    if (!AuthorizationService.hasLogin(_login.value.toString())){
+                    if (!AuthorizationService.hasLogin(login.value.toString())){
                         val user = createUser()
 
                         if (user != null){
                             AuthorizationService.signUp(user)
 
-                            view.findNavController().previousBackStackEntry?.savedStateHandle?.set(Constants.LOGIN, login.value)
-                            view.findNavController().popBackStack()
+                            navController.previousBackStackEntry?.savedStateHandle?.set(Constants.LOGIN, login.value)
+                            navController.popBackStack()
                         }
                     }
                     else {
-                        showErrorAlert(App.getContext().getString(R.string.ThisLoginIsBusy))
+                        showErrorAlert(context, context.getString(R.string.ThisLoginIsBusy))
                     }
                 }
             }
             else{
-                showErrorAlert(App.getContext().getString(R.string.PasswordsFieldsNotMatches))
+                showErrorAlert(context, context.getString(R.string.PasswordsFieldsNotMatches))
             }
         }
     }
 
-    private fun hasValidLogin() : Boolean{
+    private fun hasValidLogin(context: Context) : Boolean{
         val result: Boolean
         val loginRegex = Regex("^[A-Za-z][A-Za-z\\d]{3,15}\$")
 
@@ -59,13 +61,13 @@ class SignUpViewModel : ViewModel() {
         }
         else{
             result = false
-            showErrorAlert(App.getContext().getString(R.string.LoginIsInvalid))
+            showErrorAlert(context ,context.getString(R.string.LoginIsInvalid))
         }
 
         return result
     }
 
-    private fun hasValidPassword() : Boolean{
+    private fun hasValidPassword(context: Context) : Boolean{
         val result: Boolean
         val passRegex = Regex("^[A-Z](?=.*[a-z])(?=.*\\d)[a-zA-Z\\d]{7,15}\$")
 
@@ -74,13 +76,13 @@ class SignUpViewModel : ViewModel() {
         }
         else{
             result = false
-            showErrorAlert(App.getContext().getString(R.string.PasswordIsInvalid))
+            showErrorAlert(context, context.getString(R.string.PasswordIsInvalid))
         }
         return result
     }
 
-    private fun showErrorAlert(message: String){
-        val builder = AlertDialog.Builder(MainActivity.instance)
+    private fun showErrorAlert(context: Context, message: String){
+        val builder = AlertDialog.Builder(context)
         builder.setTitle(App.getContext().getString(R.string.Alert))
             .setMessage(message)
             .setPositiveButton(App.getContext().getString(R.string.OK)) { dialog, which ->

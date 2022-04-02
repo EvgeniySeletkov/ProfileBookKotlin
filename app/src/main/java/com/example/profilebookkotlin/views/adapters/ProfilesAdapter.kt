@@ -72,7 +72,7 @@ class ProfilesAdapter(private val profiles: ArrayList<ProfileModel>,
         : RecyclerView.ViewHolder(binding.root){
 
         fun bind(profile: ProfileModel) = with(binding){
-            if (profile.image != null){
+            if (!profile.image.isNullOrBlank()){
                 val image = Uri.parse(profile.image)
                 profileImage.setImageURI(image)
             }

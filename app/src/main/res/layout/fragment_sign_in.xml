@@ -54,8 +54,8 @@
                 android:id="@+id/sign_in_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/SignIn"
-                android:onClick="@{(view) -> viewModel.onSignInClick(view)}"/>
+                android:enabled="false"
+                android:text="@string/SignIn" />
 
             <TextView
                 android:id="@+id/sign_up_button"
@@ -63,8 +63,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/SignUp"
                 android:textAlignment="center"
-                android:textSize="18sp"
-                android:onClick="@{(view) -> viewModel.onOpenSignUpFragment(view)}"/>
+                android:textSize="18sp"/>
 
         </LinearLayout>
 

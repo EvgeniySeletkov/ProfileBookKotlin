@@ -1,12 +1,11 @@
 package com.example.profilebookkotlin
 
-import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
-import com.example.profilebookkotlin.services.authorization.AuthorizationService
+import com.example.profilebookkotlin.services.AuthorizationService
 import java.util.regex.Pattern
 
 class MainActivity : AppCompatActivity() {
@@ -15,7 +14,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        instance = this
 
         val navController = findNavController(R.id.navHostFragment)
         onNavControllerActivated(navController)
@@ -85,10 +83,5 @@ class MainActivity : AppCompatActivity() {
         }
 
         return result
-    }
-
-    companion object {
-        private var _instance: Activity? = null
-        var instance: Activity? = _instance
     }
 }

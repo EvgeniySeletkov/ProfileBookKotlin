@@ -60,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/SignUp"
                 android:layout_marginBottom="20dp"
-                android:onClick="@{(view) -> viewModel.onSignUpClick(view)}"/>
+                android:enabled="false"/>
 
         </LinearLayout>
 

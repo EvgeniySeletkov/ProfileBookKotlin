@@ -13,19 +13,20 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.profilebookkotlin.Constants
 import com.example.profilebookkotlin.R
 import com.example.profilebookkotlin.databinding.FragmentAddEditProfileBinding
-import com.example.profilebookkotlin.services.image.ImageService
+import com.example.profilebookkotlin.services.ImageService
 import com.example.profilebookkotlin.viewmodels.AddEditViewModel
 
 class AddEditProfileFragment : Fragment() {
     private lateinit var binding: FragmentAddEditProfileBinding
     private lateinit var viewModel: AddEditViewModel
+    private lateinit var navController: NavController
     private val args by navArgs<AddEditProfileFragmentArgs>()
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,23 +42,28 @@ class AddEditProfileFragment : Fragment() {
         viewModel = ViewModelProvider(this)[AddEditViewModel::class.java]
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-
-        binding.profileImage.setOnClickListener { onAddProfileImage() }
+        navController = findNavController()
 
         if (args.profileId != 0){
             viewModel.initializeProfileById(args.profileId)
         }
 
+        setHasOptionsMenu(true)
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.profileImage.setOnClickListener { onAddProfileImage() }
+
         viewModel.image.observe(viewLifecycleOwner, Observer {
-            if (it != null){
+            if (!it.isNullOrBlank()){
                 val image = Uri.parse(it)
                 binding.profileImage.setImageURI(image)
             }
         })
-
-        setHasOptionsMenu(true)
-
-        return binding.root
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -68,9 +74,7 @@ class AddEditProfileFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId){
             R.id.save_action -> {
-                if (viewModel.onProfileSaved()){
-                    findNavController().popBackStack()
-                }
+                viewModel.onProfileSave(navController, requireContext())
                 true
             }
             else -> super.onOptionsItemSelected(item)

@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.profilebookkotlin.R
@@ -18,6 +19,7 @@ import com.example.profilebookkotlin.views.adapters.ProfilesAdapter
 class MainListFragment : Fragment() {
     private lateinit var binding: FragmentMainListBinding
     private lateinit var viewModel: MainListViewModel
+    private lateinit var navController: NavController
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,13 +33,24 @@ class MainListFragment : Fragment() {
         viewModel = ViewModelProvider(this)[MainListViewModel::class.java]
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        navController = findNavController()
 
         val layoutManager = LinearLayoutManager(activity)
         binding.recyclerView.layoutManager = layoutManager
 
+        setHasOptionsMenu(true)
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.addProfileButton.setOnClickListener { viewModel.onAddProfileTapped(navController) }
+
         val profileActionListener = object : ProfileActionListener{
             override fun onEditProfile(profile: ProfileModel) {
-                findNavController().navigate(MainListFragmentDirections.actionMainListFragmentToAddEditProfileFragment(profile.id, getString(R.string.EditProfile)))
+                navController.navigate(MainListFragmentDirections.actionMainListFragmentToAddEditProfileFragment(profile.id, getString(R.string.EditProfile)))
             }
 
             override fun onDeleteProfile(profile: ProfileModel) {
@@ -49,15 +62,10 @@ class MainListFragment : Fragment() {
             val adapter = ProfilesAdapter(it, profileActionListener)
             binding.recyclerView.adapter = adapter
         })
-
-        setHasOptionsMenu(true)
-
-        return binding.root
     }
 
     override fun onStart() {
         super.onStart()
-
         viewModel.onGetProfiles()
     }
 
@@ -69,13 +77,10 @@ class MainListFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId){
             R.id.logout_action -> {
-                viewModel.onLogout()
-                findNavController().navigate(MainListFragmentDirections.actionMainListFragmentToSignInFragment2())
+                viewModel.onLogout(navController)
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
-
-
     }
 }
