@@ -30,4 +30,5 @@
     <string name="UsersSignIn">Users SignIn</string>
     <string name="UserSignUp">Users SignUp</string>
     <string name="MainList">Main List</string>
+    <string name="NoProfiles">No profiles</string>
 </resources>

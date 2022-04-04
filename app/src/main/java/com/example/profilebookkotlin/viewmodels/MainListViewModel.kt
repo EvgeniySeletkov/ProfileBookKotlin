@@ -29,6 +29,7 @@ class MainListViewModel : ViewModel() {
 
     fun onDeleteProfile(profile: ProfileModel){
         viewModelScope.launch {
+            profiles.value?.remove(profile)
             ProfileService.deleteProfile(profile)
         }
     }

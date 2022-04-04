@@ -2,6 +2,7 @@ package com.example.profilebookkotlin.views.fragments
 
 import android.os.Bundle
 import android.view.*
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -55,12 +56,14 @@ class MainListFragment : Fragment() {
 
             override fun onDeleteProfile(profile: ProfileModel) {
                 viewModel.onDeleteProfile(profile)
+                binding.noProfilesLabel.isVisible = viewModel.profiles.value!!.isEmpty()
             }
         }
 
         viewModel.profiles.observe(viewLifecycleOwner, Observer {
             val adapter = ProfilesAdapter(it, profileActionListener)
             binding.recyclerView.adapter = adapter
+            binding.noProfilesLabel.isVisible = viewModel.profiles.value!!.isEmpty()
         })
     }
 
