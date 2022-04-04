@@ -1,5 +1,6 @@
 package com.example.profilebookkotlin.views.fragments
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
 import androidx.core.view.isVisible
@@ -47,7 +48,7 @@ class MainListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.addProfileButton.setOnClickListener { viewModel.onAddProfileTapped(navController) }
+        binding.addProfileButton.setOnClickListener { viewModel.onAddProfileTapped(navController, requireContext()) }
 
         val profileActionListener = object : ProfileActionListener{
             override fun onEditProfile(profile: ProfileModel) {
@@ -80,7 +81,7 @@ class MainListFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId){
             R.id.logout_action -> {
-                viewModel.onLogout(navController)
+                viewModel.onLogout(navController, requireContext())
                 true
             }
             else -> super.onOptionsItemSelected(item)

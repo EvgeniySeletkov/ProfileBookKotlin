@@ -83,9 +83,9 @@ class SignUpViewModel : ViewModel() {
 
     private fun showErrorAlert(context: Context, message: String){
         val builder = AlertDialog.Builder(context)
-        builder.setTitle(App.getContext().getString(R.string.Alert))
+        builder.setTitle(context.getString(R.string.Alert))
             .setMessage(message)
-            .setPositiveButton(App.getContext().getString(R.string.OK)) { dialog, which ->
+            .setPositiveButton(context.getString(R.string.OK)) { dialog, which ->
                 dialog.cancel()
             }.create()
 

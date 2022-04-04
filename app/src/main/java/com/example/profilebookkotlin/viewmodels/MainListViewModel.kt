@@ -1,5 +1,7 @@
 package com.example.profilebookkotlin.viewmodels
 
+import android.app.AlertDialog
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -23,8 +25,8 @@ class MainListViewModel : ViewModel() {
         }
     }
 
-    fun onAddProfileTapped(navController: NavController){
-        navController.navigate(MainListFragmentDirections.actionMainListFragmentToAddEditProfileFragment(0, App.getContext().getString(R.string.AddProfile)))
+    fun onAddProfileTapped(navController: NavController, context: Context){
+        navController.navigate(MainListFragmentDirections.actionMainListFragmentToAddEditProfileFragment(0, context.getString(R.string.AddProfile)))
     }
 
     fun onDeleteProfile(profile: ProfileModel){
@@ -34,7 +36,23 @@ class MainListViewModel : ViewModel() {
         }
     }
 
-    fun onLogout(navController: NavController){
+    fun onLogout(navController: NavController, context: Context){
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle(context.getString(R.string.Alert))
+            .setMessage(context.getString(R.string.LogOutAlertMessage))
+            .setPositiveButton(context.getString(R.string.Yes)) { dialog, which ->
+                dialog.dismiss()
+                logOut(navController)
+            }
+            .setNegativeButton(context.getString(R.string.No)) { dialog, which ->
+                dialog.cancel()
+            }
+            .create()
+
+        builder.show()
+    }
+
+    private fun logOut(navController: NavController) {
         AuthorizationService.logout()
         navController.navigate(MainListFragmentDirections.actionMainListFragmentToSignInFragment2())
     }

@@ -51,21 +51,37 @@ class AddEditViewModel : ViewModel() {
         profile.description = if (description.value != null) description.value.toString() else ""
 
         if (!hasEmptyFields()){
-            viewModelScope.launch {
-                if (profile.userId == 0){
-                    profile.dateTime = SimpleDateFormat(Constants.DATE_OUTPUT_PATTERN).format(Date()).toString()
-                    ProfileService.addProfile(profile)
+            val builder = AlertDialog.Builder(context)
+            builder.setTitle(context.getString(R.string.Alert))
+                .setMessage(context.getString(R.string.SaveProfileAlertMessage))
+                .setPositiveButton(context.getString(R.string.Yes)) { dialog, which ->
+                    saveProfile(navController)
+                    dialog.dismiss()
                 }
-                else {
-                    ProfileService.editProfile(profile)
+                .setNegativeButton(context.getString(R.string.No)) { dialog, which ->
+                    dialog.cancel()
                 }
-            }
+                .create()
 
-            navController.popBackStack()
+            builder.show()
         }
         else{
             showErrorAlert(context, context.getString(R.string.NickNameOrNameFieldIsEmpty))
         }
+    }
+
+    private fun saveProfile(navController: NavController) {
+        viewModelScope.launch {
+            if (profile.userId == 0){
+                profile.dateTime = SimpleDateFormat(Constants.DATE_OUTPUT_PATTERN).format(Date()).toString()
+                ProfileService.addProfile(profile)
+            }
+            else {
+                ProfileService.editProfile(profile)
+            }
+        }
+
+        navController.popBackStack()
     }
 
     private fun hasEmptyFields() : Boolean{
@@ -74,9 +90,9 @@ class AddEditViewModel : ViewModel() {
 
     private fun showErrorAlert(context: Context, message: String){
         val builder = AlertDialog.Builder(context)
-        builder.setTitle(App.getContext().getString(R.string.Alert))
+        builder.setTitle(context.getString(R.string.Alert))
             .setMessage(message)
-            .setPositiveButton(App.getContext().getString(R.string.OK)) { dialog, which ->
+            .setPositiveButton(context.getString(R.string.OK)) { dialog, which ->
                 dialog.cancel()
             }.create()
 

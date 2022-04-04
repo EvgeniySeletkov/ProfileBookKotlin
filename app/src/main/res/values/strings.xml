@@ -31,4 +31,8 @@
     <string name="UserSignUp">Users SignUp</string>
     <string name="MainList">Main List</string>
     <string name="NoProfiles">No profiles</string>
+    <string name="SaveProfileAlertMessage">"Are you sure you want to save profile?</string>
+    <string name="Yes">Yes</string>
+    <string name="No">No</string>
+    <string name="LogOutAlertMessage">Are you sure you want to logout?</string>
 </resources>

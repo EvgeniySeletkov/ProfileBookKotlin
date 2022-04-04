@@ -45,8 +45,8 @@ class ProfilesAdapter(private val profiles: ArrayList<ProfileModel>,
 
     private fun showPopupMenu(view: View) {
         val popupMenu = PopupMenu(view.context, view)
-        popupMenu.menu.add(Menu.NONE, 0, Menu.NONE, App.getContext().getString(R.string.Edit))
-        popupMenu.menu.add(Menu.NONE, 1, Menu.NONE, App.getContext().getString(R.string.Delete))
+        popupMenu.menu.add(Menu.NONE, 0, Menu.NONE, view.context.getString(R.string.Edit))
+        popupMenu.menu.add(Menu.NONE, 1, Menu.NONE, view.context.getString(R.string.Delete))
         popupMenu.setOnMenuItemClickListener { selectMenuItem(it.itemId, view) }
         popupMenu.show()
     }
