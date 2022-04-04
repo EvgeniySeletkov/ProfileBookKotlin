@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
-import com.example.profilebookkotlin.App
 import com.example.profilebookkotlin.Constants
 import com.example.profilebookkotlin.R
 import com.example.profilebookkotlin.models.profile.ProfileModel
@@ -50,7 +49,7 @@ class AddEditViewModel : ViewModel() {
         profile.name = name.value.toString()
         profile.description = if (description.value != null) description.value.toString() else ""
 
-        if (!hasEmptyFields()){
+        if (!checkAreFieldsEmpty()){
             val builder = AlertDialog.Builder(context)
             builder.setTitle(context.getString(R.string.Alert))
                 .setMessage(context.getString(R.string.SaveProfileAlertMessage))
@@ -84,7 +83,7 @@ class AddEditViewModel : ViewModel() {
         navController.popBackStack()
     }
 
-    private fun hasEmptyFields() : Boolean{
+    private fun checkAreFieldsEmpty() : Boolean{
         return nickname.value.isNullOrBlank() || name.value.isNullOrBlank()
     }
 

@@ -25,7 +25,7 @@ object AuthorizationService {
         _database.userDao.insert(user)
     }
 
-    suspend fun hasLogin(login: String) : Boolean{
+    suspend fun checkIsUserExist(login: String) : Boolean{
         val user = _database.userDao.get(login)
 
         return user != null

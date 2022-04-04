@@ -44,19 +44,19 @@ class SignUpFragment : Fragment() {
 
     private fun observe() {
         viewModel.login.observe(viewLifecycleOwner){
-            binding.signUpButton.isEnabled = !hasEmptyFields()
+            binding.signUpButton.isEnabled = !checkAreFieldsEmpty()
         }
 
         viewModel.password.observe(viewLifecycleOwner){
-            binding.signUpButton.isEnabled = !hasEmptyFields()
+            binding.signUpButton.isEnabled = !checkAreFieldsEmpty()
         }
 
         viewModel.confirmPassword.observe(viewLifecycleOwner){
-            binding.signUpButton.isEnabled = !hasEmptyFields()
+            binding.signUpButton.isEnabled = !checkAreFieldsEmpty()
         }
     }
 
-    private fun hasEmptyFields() : Boolean{
+    private fun checkAreFieldsEmpty() : Boolean{
         return viewModel.login.value.isNullOrBlank()
                 || viewModel.password.value.isNullOrBlank()
                 || viewModel.confirmPassword.value.isNullOrBlank()

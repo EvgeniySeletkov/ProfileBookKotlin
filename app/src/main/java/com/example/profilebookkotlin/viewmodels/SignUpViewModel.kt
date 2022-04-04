@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
-import com.example.profilebookkotlin.App
 import com.example.profilebookkotlin.Constants
 import com.example.profilebookkotlin.R
 import com.example.profilebookkotlin.models.user.UserModel
@@ -27,11 +26,11 @@ class SignUpViewModel : ViewModel() {
     }
 
     fun onSignUpTapped(navController: NavController, context: Context){
-        if (hasValidLogin(context)
-            && hasValidPassword(context)){
+        if (checkIsLoginValid(context)
+            && checkIsPasswordValid(context)){
             if(password.value == confirmPassword.value){
                 viewModelScope.launch {
-                    if (!AuthorizationService.hasLogin(login.value.toString())){
+                    if (!AuthorizationService.checkIsUserExist(login.value.toString())){
                         val user = createUser()
 
                         if (user != null){
@@ -52,7 +51,7 @@ class SignUpViewModel : ViewModel() {
         }
     }
 
-    private fun hasValidLogin(context: Context) : Boolean{
+    private fun checkIsLoginValid(context: Context) : Boolean{
         val result: Boolean
         val loginRegex = Regex("^[A-Za-z][A-Za-z\\d]{3,15}\$")
 
@@ -67,7 +66,7 @@ class SignUpViewModel : ViewModel() {
         return result
     }
 
-    private fun hasValidPassword(context: Context) : Boolean{
+    private fun checkIsPasswordValid(context: Context) : Boolean{
         val result: Boolean
         val passRegex = Regex("^[A-Z](?=.*[a-z])(?=.*\\d)[a-zA-Z\\d]{7,15}\$")
 

@@ -58,15 +58,15 @@ class SignInFragment : Fragment() {
         }
 
         viewModel.login.observe(viewLifecycleOwner){
-            binding.signInButton.isEnabled = !hasEmptyFields()
+            binding.signInButton.isEnabled = !checkAreFieldsEmpty()
         }
 
         viewModel.password.observe(viewLifecycleOwner){
-            binding.signInButton.isEnabled = !hasEmptyFields()
+            binding.signInButton.isEnabled = !checkAreFieldsEmpty()
         }
     }
 
-    private fun hasEmptyFields() : Boolean{
+    private fun checkAreFieldsEmpty() : Boolean{
         return viewModel.login.value.isNullOrBlank() || viewModel.password.value.isNullOrBlank()
     }
 }
