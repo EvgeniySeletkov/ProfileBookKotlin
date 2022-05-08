@@ -1,7 +1,7 @@
 package com.example.profilebookkotlin.helpers
 
 object Validator {
-    fun checkIsEmailValid(login: String) : Boolean {
+    fun checkIsLoginValid(login: String) : Boolean {
         return Regex("^[A-Za-z][A-Za-z\\d]{3,15}\$").containsMatchIn(login)
     }
 

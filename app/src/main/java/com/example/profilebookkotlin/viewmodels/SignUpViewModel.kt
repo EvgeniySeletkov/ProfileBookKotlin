@@ -55,7 +55,7 @@ class SignUpViewModel : ViewModel() {
     private fun checkIsLoginValid(context: Context) : Boolean{
         val result: Boolean
 
-        if (Validator.checkIsEmailValid(login.value.toString())){
+        if (Validator.checkIsLoginValid(login.value.toString())){
             result = true
         }
         else{
