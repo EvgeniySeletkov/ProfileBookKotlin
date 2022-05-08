@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import com.example.profilebookkotlin.Constants
 import com.example.profilebookkotlin.R
+import com.example.profilebookkotlin.helpers.Validator
 import com.example.profilebookkotlin.models.user.UserModel
 import com.example.profilebookkotlin.services.AuthorizationService
 import kotlinx.coroutines.launch
@@ -53,9 +54,8 @@ class SignUpViewModel : ViewModel() {
 
     private fun checkIsLoginValid(context: Context) : Boolean{
         val result: Boolean
-        val loginRegex = Regex("^[A-Za-z][A-Za-z\\d]{3,15}\$")
 
-        if (loginRegex.containsMatchIn(login.value.toString())){
+        if (Validator.checkIsEmailValid(login.value.toString())){
             result = true
         }
         else{
@@ -68,9 +68,8 @@ class SignUpViewModel : ViewModel() {
 
     private fun checkIsPasswordValid(context: Context) : Boolean{
         val result: Boolean
-        val passRegex = Regex("^[A-Z](?=.*[a-z])(?=.*\\d)[a-zA-Z\\d]{7,15}\$")
 
-        if (passRegex.containsMatchIn(password.value.toString())){
+        if (Validator.checkIsPasswordValid(password.value.toString())){
             result = true
         }
         else{
